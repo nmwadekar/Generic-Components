@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<primary_menu>
+		<name>SWIFT MT</name>
+		<secondary_menu>
+			<name>Customer Credit Transfer</name>
+			<tertiary_menu>
+				<name>MT103</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT103+</name>
+			</tertiary_menu>
+		</secondary_menu>
+		<secondary_menu>
+			<name>Bank To Bank Transfer</name>
+			<tertiary_menu>
+				<name>MT202</name>
+				<quaternary_menu>
+					<name>Hello</name>
+					<pentarnary_menu>
+						<name>World</name>
+					</pentarnary_menu>
+				</quaternary_menu>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT202COV</name>
+			</tertiary_menu>
+		</secondary_menu>
+		<secondary_menu>
+			<name>Advices Reports</name>
+			<tertiary_menu>
+				<name>MT900</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT910</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT940</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT942</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>MT950</name>
+			</tertiary_menu>
+		</secondary_menu>
+	</primary_menu>
+	<primary_menu>
+		<name>SWIFT MX</name>
+		<secondary_menu>
+			<name>Payment Initiation</name>
+			<tertiary_menu>
+				<name>PAIN.001</name>
+			</tertiary_menu>
+			<tertiary_menu>
+				<name>PAIN.008</name>
+			</tertiary_menu>
+		</secondary_menu>
+	</primary_menu>
+</menu>
