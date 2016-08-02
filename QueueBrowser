@@ -12,7 +12,7 @@ import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 /**
- * @author 58000
+ * @author Nayan Wadekar
  *
  */
 public class QueueBrowser {
