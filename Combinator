@@ -1,0 +1,60 @@
+package nmw.raw;
+
+public class Combinator {
+	
+  public static void main(String[] args) {
+	  
+	  find(0, "ABCD".toCharArray());
+  }
+  
+  public static void find(int key, char[] input){
+	  
+	  if(key >= input.length)
+		  return;
+	  
+	  permute(key, input);
+	  
+	  find(key+1, input);
+	  
+  }
+  
+  public static void permute(int key, char[] input){
+	  
+	  char[] o = reduceArray(input, key);
+	  
+	  System.out.println(String.valueOf(input[key]) + new String(o));
+	  
+	  for(int i=0; i < o.length-1; i++){
+			  
+		  int j = i+1;
+		  
+			  char swapper = o[i];
+			  o[i] = o[j];
+			  o[j] = swapper;
+			  
+			  System.out.println(String.valueOf(input[key])+new String(o));
+		  
+	  }
+  }
+  
+  public static char[] reduceArray(char[] input, int key){
+	  
+	  char[] output = new char[input.length-1];
+	  
+	  int j=0;
+	  
+	  for(int i=0; i<input.length; i++){
+		  
+		  if(key != i)
+			  output[j] = input[i];
+		  else{
+			  continue;
+		  }
+		  
+		  j++;
+	  }
+	  
+	  return output;
+  }
+  
+}
