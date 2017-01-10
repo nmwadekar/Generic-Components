@@ -1,10 +1,17 @@
 package nmw.raw;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Combinator {
+	
+	private static Set<String> finalOutput = new HashSet<>();
 	
   public static void main(String[] args) {
 	  
-	  find(0, "ABCD".toCharArray());
+	  find(0, "ABC".toCharArray());
+	  
+	  System.out.println("output size "+finalOutput.size() + " : " +finalOutput);
   }
   
   public static void find(int key, char[] input){
@@ -22,7 +29,9 @@ public class Combinator {
 	  
 	  char[] o = reduceArray(input, key);
 	  
-	  System.out.println(String.valueOf(input[key]) + new String(o));
+//	  System.out.println(String.valueOf(input[key]) + new String(o));
+	  
+	  finalOutput.add(String.valueOf(input[key]) + new String(o));
 	  
 	  for(int i=0; i < o.length-1; i++){
 			  
@@ -32,7 +41,9 @@ public class Combinator {
 			  o[i] = o[j];
 			  o[j] = swapper;
 			  
-			  System.out.println(String.valueOf(input[key])+new String(o));
+//			  System.out.println(String.valueOf(input[key])+new String(o));
+			  
+			  finalOutput.add(String.valueOf(input[key])+new String(o));
 		  
 	  }
   }
