@@ -1,0 +1,174 @@
+package nmw.ds;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DirectedGraph {
+
+	private List<Vertex> vertices = new ArrayList<DirectedGraph.Vertex>();
+	private List<Edge> edges = new ArrayList<DirectedGraph.Edge>();
+	
+	public static void main(String[] args) {
+
+		DirectedGraph G = new DirectedGraph();
+		
+		Vertex a = G.new Vertex("A");
+		Vertex b = G.new Vertex("B");
+		Vertex c = G.new Vertex("C");
+		Vertex d = G.new Vertex("D");
+		Vertex e = G.new Vertex("E");
+		Vertex f = G.new Vertex("F");
+		
+		G.vertices.add(a);
+		G.vertices.add(b);
+		G.vertices.add(c);
+		G.vertices.add(d);
+		G.vertices.add(e);
+		
+		Edge ab = G.new Edge(a,b);
+		Edge ac = G.new Edge(a,c);
+		Edge cd = G.new Edge(c,d);
+		Edge ea = G.new Edge(e,a);
+		
+		G.edges.add(ab);
+		G.edges.add(ac);
+		G.edges.add(cd);
+		G.edges.add(ea);
+		
+		findEdgeFromVertexTest(G, e, c);
+	}
+	
+	private static void findEdgeFromVertex(DirectedGraph G, Vertex from, Vertex to){
+		
+		for(Edge e : G.edges){
+			
+			if(from.equals(e.getFromVertex())){
+				
+				System.out.println(from);
+				System.out.println(e.getToVertex());
+				
+				if(to.equals(e.getToVertex())){
+					
+//					System.out.println(to);
+					
+					System.out.println("EDGE FOUND, EXITING.");
+					
+					break;
+					
+				}
+				
+				findEdgeFromVertex(G, e.getToVertex(), to);
+				
+					
+			}
+			
+		}
+		
+	}
+	
+	private static boolean findEdgeFromVertexTest(DirectedGraph G, Vertex from, Vertex to){
+		
+		boolean found = false;
+		
+		for(Edge e : G.edges){
+			
+			if(from.equals(e.getFromVertex())){
+				
+//				System.out.println("1-"+from);
+//				System.out.println("2-"+e.getToVertex());
+				
+				if(to.equals(e.getToVertex())){
+					
+//					System.out.println(to);
+					
+					System.out.println("EDGE FOUND, EXITING.");
+					
+					found = true;
+					
+					break;
+					
+				}
+				
+				boolean b = findEdgeFromVertexTest(G, e.getToVertex(), to);
+				
+				if(b)
+					System.out.println("#"+e.getToVertex()+ to);
+			}
+		}
+		
+		return found;
+	}
+	
+/*	public static void printPath(MyDirectedGraph G, Vertex from, Vertex to){
+		
+		
+		
+	}*/
+	
+	private class Vertex {
+		
+		private String name;
+
+		public Vertex(String name) {
+			super();
+			this.name = name;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Vertex other = (Vertex) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
+
+		private DirectedGraph getOuterType() {
+			return DirectedGraph.this;
+		}
+
+		@Override
+		public String toString() {
+			return "Vertex [name=" + name + "]";
+		}
+		
+	}
+	
+	private class Edge {
+		
+		private Vertex a, b;
+
+		public Edge(Vertex a, Vertex b) {
+			super();
+			this.a = a;
+			this.b = b;
+		}
+		
+		public Vertex getFromVertex(){
+			return a;
+		}
+		
+		public Vertex getToVertex(){
+			return b;
+		}
+	}
+}
