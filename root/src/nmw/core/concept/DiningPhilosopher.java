@@ -188,5 +188,37 @@ public class DiningPhilosopher {
 			}
 		}
 	}
+	
+	private final static class Coordinator {
+		 
+		private int[] subscribers;
+		private int currentCounter;
+		
+		public Coordinator(int totalConnectors, int currentCounter) {
+			
+			super();
+			
+			this.currentCounter = currentCounter;
+			
+			init(totalConnectors, currentCounter);
+		}
+
+		private void init(int totalConnectors, int currentCounter){
+			
+			subscribers = new int[totalConnectors];
+			
+			for(int i=0; i<totalConnectors; i++){
+				
+				subscribers[i] = currentCounter;
+			}
+		}
+
+		public boolean requestResource(int pId){
+			
+			
+			
+			return false;
+		}
+	}
 
 }
