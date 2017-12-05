@@ -16,7 +16,7 @@
  * 
  */
 
-package nmw.util;
+package nmw.core.concept;
 
 /**
  * @author Nayan_Wadekar

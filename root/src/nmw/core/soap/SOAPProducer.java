@@ -16,19 +16,19 @@ import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import model.IParameter;
 import model.Parameter;
 import util.GenericUtil;
-import util.MessageLogger;
+import util.MessageLogger;*/
 
 
-public class SOAPProducer implements IProducer {
+public class SOAPProducer /*implements IProducer*/ {
 
 	//private static Logger request = MessageLogger.getRequestLogger("requestLogger");
-	private static Logger responseLog = MessageLogger.getResponseLogger("responseLogger");
+	/*private static Logger responseLog = MessageLogger.getResponseLogger("responseLogger");
 	private static Logger error = MessageLogger.getErrorLogger("errorLogger");
 	
 	@Override
@@ -121,5 +121,5 @@ public class SOAPProducer implements IProducer {
 
 		return message;
 
-	}
+	}*/
 }

@@ -1,4 +1,4 @@
-package nmw.json;
+package nmw.core.json;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+//import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.JsonNode;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.node.ArrayNode;
+//import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JSONUtils {
 
@@ -24,7 +24,7 @@ public class JSONUtils {
     private final static String NODE_FIELD_NAME = "NODE_FIELD_NAME";
     private final static String NODE_SEPARATOR = "/";
     
-    public static <T> T fetchNodeFromJSON(String input, String path) throws JsonParseException, JsonMappingException, IOException{
+    /*public static <T> T fetchNodeFromJSON(String input, String path) throws JsonParseException, JsonMappingException, IOException{
         
         JsonNode root = new ObjectMapper().readTree(input);
         
@@ -144,8 +144,8 @@ public class JSONUtils {
                     JsonNode node = new ObjectMapper().convertValue(modifiedValue, JsonNode.class);
                     on.set(nodeName, node);
                 }
-                /*else 
-                    throw new RuntimeException("Object type not implemented - " + modifiedValue);*/
+                else 
+                    throw new RuntimeException("Object type not implemented - " + modifiedValue);
                 
             }else if(temporaryHolder instanceof ObjectNode && isNullValue){
                 
@@ -320,5 +320,5 @@ public class JSONUtils {
         ObjectMapper mapper = new ObjectMapper();
         
         return mapper.readTree(input);
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package nmw.jms;
+package nmw.core.jms;
 
 import java.io.UnsupportedEncodingException;
 
@@ -9,22 +9,24 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
+import nmw.core.jms.JMSAPIParam;
 
-public abstract class JMSConsumer<E extends JMSAPIParam> {
+//<> needs update
+public abstract class JMSConsumer {
     
     private Connection connection;
     private Session session;
     private MessageConsumer consumer;
     private Long waitDuration;
     
-    public void initialize(E parameter) throws NumberFormatException, JMSException{  
+    public void initialize(JMSAPIParam parameter) throws NumberFormatException, JMSException{  
         
         ConnectionFactory cf = createConnectionFactory(parameter);
         
         createConsumer(parameter, cf);
     }
 
-    protected abstract ConnectionFactory createConnectionFactory(E parameter) throws NumberFormatException, JMSException;
+    protected abstract ConnectionFactory createConnectionFactory(JMSAPIParam parameter) throws NumberFormatException, JMSException;
 
     protected void createConsumer(JMSAPIParam parameter, ConnectionFactory factory) throws JMSException{
             

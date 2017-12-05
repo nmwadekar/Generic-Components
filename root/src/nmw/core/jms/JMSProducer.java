@@ -1,4 +1,4 @@
-package nmw.jms;
+package nmw.core.jms;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -8,6 +8,8 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+
+import nmw.core.utilities.CommonUtils;
 
 public abstract class JMSProducer<E extends JMSAPIParam> {
 

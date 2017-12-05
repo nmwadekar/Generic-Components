@@ -1,12 +1,12 @@
-package nmw.ds;
+package nmw.core.concept;
 
-public class Node {
+public class GraphNode {
 	
 	int index;
 	
-	Node left, right;
+	GraphNode left, right;
 
-	public Node(int index) {
+	public GraphNode(int index) {
 		super();
 		this.index = index;
 	}

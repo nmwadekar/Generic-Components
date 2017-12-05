@@ -16,7 +16,7 @@
  * 
  */
 
-package nmw.util;
+package nmw.core.concept;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,8 +27,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import nmw.util.SortCriteria;
 
 /**
  * @author Nayan_Wadekar

@@ -1,4 +1,4 @@
-package nmw.kafka;
+package nmw.core.kafka;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,18 +7,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.kafka.clients.consumer.CommitFailedException;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.log4j.lf5.LogLevel;
-import org.apache.log4j.lf5.LogLevelFormatException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import org.apache.kafka.clients.consumer.CommitFailedException;
+//import org.apache.kafka.clients.consumer.ConsumerRecord;
+//import org.apache.kafka.clients.consumer.ConsumerRecords;
+//import org.apache.kafka.clients.consumer.KafkaConsumer;
+//import org.apache.log4j.lf5.LogLevel;
+//import org.apache.log4j.lf5.LogLevelFormatException;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
 
 public class KafkaConsumer implements Runnable {
 
-	private static final Logger LOGGER = LogManager.getLogger(KafkaConsumerAPI.class);
+/*	private static final Logger LOGGER = LogManager.getLogger(KafkaConsumerAPI.class);
 	private List<String> eventMsg = new ArrayList<String>();
 	private boolean isConsumerRunning = true;
 	private static final long DEFAULT_POLLING_INTERVAL = 3000l;
@@ -65,12 +65,12 @@ public class KafkaConsumer implements Runnable {
 
 		Thread t = new Thread(this, "KafkaConsumerAPIThread");
 		t.start();
-	}
+	}*/
 
 	@Override
 	public void run() {
 
-		try {
+		/*try {
 
 			String eventApp = null;
 
@@ -103,10 +103,10 @@ public class KafkaConsumer implements Runnable {
 			throw new RuntimeException(e);
 		} finally {
 			kafkaConsumer.close();
-		}
+		}*/
 	}
 
-	public void stopConsumer() {
+	/*public void stopConsumer() {
 		isConsumerRunning = false;
 	}
 
@@ -158,5 +158,5 @@ public class KafkaConsumer implements Runnable {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 }

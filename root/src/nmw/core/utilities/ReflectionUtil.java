@@ -1,4 +1,4 @@
-package nmw.util;
+package nmw.core.utilities;
 
 import java.lang.reflect.Method;
 

@@ -1,4 +1,4 @@
-package nmw.db;
+package nmw.core.db;
 
 import java.io.File;
 import java.io.FileReader;
@@ -18,9 +18,12 @@ import java.util.Map;
 
 import javax.jms.JMSException;
 
-import org.apache.ibatis.jdbc.ScriptRunner;
+//import org.apache.ibatis.jdbc.ScriptRunner;
 
-public abstract class DBAPI<E extends DBAPIParam> {
+import nmw.core.utilities.CommonUtils;
+
+// <> needs to be updated
+public abstract class DBAPI<E extends Object> {
 
     private Connection conn = null;
 
@@ -152,7 +155,9 @@ public abstract class DBAPI<E extends DBAPIParam> {
 
         String scriptPath = CommonUtils.getResourcePath(path);
         
-        ScriptRunner runner = new ScriptRunner(conn);
+        // iBatis script runner, uncomment below
+        
+        /*ScriptRunner runner = new ScriptRunner(conn);
 
         File sqlScript = new File(scriptPath);
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(System.out, "UTF-8"));
@@ -164,6 +169,25 @@ public abstract class DBAPI<E extends DBAPIParam> {
         runner.setDelimiter(";");
         runner.setAutoCommit(true);
 
-        runner.runScript(new FileReader(sqlScript));
+        runner.runScript(new FileReader(sqlScript));*/
+    }
+    
+    private class ProcedureOutParam<K> {
+    	
+    	private int type;
+    	private Object value;
+    	
+		public int getType() {
+			return type;
+		}
+		public void setType(int type) {
+			this.type = type;
+		}
+		public Object getValue() {
+			return value;
+		}
+		public void setValue(Object value) {
+			this.value = value;
+		}
     }
 }

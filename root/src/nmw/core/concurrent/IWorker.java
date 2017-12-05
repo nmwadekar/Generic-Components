@@ -16,7 +16,7 @@
  * 
  */
 
-package nmw.util;
+package nmw.core.concurrent;
 
 /**
  * @author Nayan_Wadekar

@@ -1,4 +1,4 @@
-package mg.util;
+package nmw.core.pet;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,11 +34,11 @@ public final class DynamicMenu {
 
 			DOMParser parser = new DOMParser();
 			// System.out.println(SystemProperty.getProperty("MENU_XML_PATH"));
-			parser.parse(SystemProperty.getProperty("MENU_XML_PATH"));
+			parser.parse(System.getProperty("MENU_XML_PATH"));
 			Document doc = parser.getDocument();
 			NodeList root = doc.getChildNodes();
 
-			String menuItems = (String) SystemProperty.getProperty("MENU_ITEMS");
+			String menuItems = (String) System.getProperty("MENU_ITEMS");
 			individualItems = menuItems.split(",");
 
 			menuTreeStr = process(root);

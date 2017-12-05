@@ -7,24 +7,25 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
+//import org.apache.activemq.ActiveMQConnectionFactory;
 
-import model.IParameter;
-import model.MessageParameter;
-import util.GenericUtil;
+//import model.IParameter;
+//import model.MessageParameter;
+//import util.GenericUtil;
 
-public class MessageGenerator implements IProducer {
+// disabling it, will be enabled once required
+
+public class MessageGenerator {
 
 	private final int RETRY_COUNT = 3;
 
-	@Override
+	/*@Override
 	public IParameter produce(IParameter parameter, String user, String environment, String service, String msg) {
 
 		MessageParameter messageParameter = (MessageParameter) parameter;
 		
 		int currentCount = 1;
 		boolean flagToRetry = true;
-		
 		
 		Session session = null;
 		
@@ -78,5 +79,5 @@ public class MessageGenerator implements IProducer {
 		}
 		
 		return null;
-	}
+	}*/
 }

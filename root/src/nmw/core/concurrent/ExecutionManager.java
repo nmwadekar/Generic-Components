@@ -16,7 +16,7 @@
  * 
  */
 
-package nmw.util;
+package nmw.core.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;

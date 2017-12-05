@@ -1,4 +1,4 @@
-package nmw.ds;
+package nmw.core.concept;
 
 import java.util.Deque;
 import java.util.LinkedList;

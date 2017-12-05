@@ -1,4 +1,4 @@
-package core;
+package nmw.core.concept;
 
 public class PascalTriangle {
 

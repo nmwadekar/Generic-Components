@@ -20,7 +20,7 @@ package nmw.core.concurrent;
 
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
-
+import nmw.core.concurrent.IWorker;
 /**
  * @author Nayan_Wadekar
  */

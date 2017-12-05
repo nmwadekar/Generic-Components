@@ -1,4 +1,4 @@
-package nmw.jms;
+package nmw.core.jms;
 
 import java.util.Enumeration;
 
@@ -9,17 +9,19 @@ import javax.jms.Message;
 import javax.jms.Queue;
 import javax.jms.Session;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
+//import org.apache.activemq.ActiveMQConnectionFactory;
 
 /**
  * @author Nayan Wadekar
  *
  */
+
+//disabling it, will be enabled once required
 public class QueueBrowser {
 
 	public static void main(String[] args) throws JMSException {
 		
-		ConnectionFactory factory = new ActiveMQConnectionFactory(
+/*		ConnectionFactory factory = new ActiveMQConnectionFactory(
                 "tcp://" + "localhost" + ":" + "61616");
 		
 		Connection conn = factory.createConnection("admin", "admin");
@@ -38,6 +40,6 @@ public class QueueBrowser {
                 Message tempMsg = (Message)msgs.nextElement(); 
                 System.out.println("Message: " + tempMsg); 
             }
-        }
+        }*/
 	}
 }

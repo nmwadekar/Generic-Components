@@ -10,16 +10,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 
 import model.IParameter;
 import model.Parameter;
 import util.GenericUtil;
-import util.MessageLogger;
+import util.MessageLogger;*/
 
-public class RESTProducer implements IProducer {
-
+public class RESTProducer /*implements IProducer */{
+/*
 	private static Logger request = MessageLogger.getRequestLogger("requestLogger");
 	private static Logger responseLog = MessageLogger.getResponseLogger("responseLogger");
 	private static Logger error = MessageLogger.getErrorLogger("errorLogger");
@@ -64,5 +64,5 @@ public class RESTProducer implements IProducer {
 				throw e;
 			}
 		
-	}
+	}*/
 }

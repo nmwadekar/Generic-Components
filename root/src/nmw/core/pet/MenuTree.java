@@ -1,4 +1,4 @@
-package mg.util;
+package nmw.core.pet;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,3 +1,5 @@
+package nmw.core.xml;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

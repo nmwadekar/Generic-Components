@@ -1,10 +1,10 @@
 package nmw.core.utilities;
 
-import org.apache.log4j.*;
+//import org.apache.log4j.*;
 
 public class MessageLogger {
 	
-	private static final String pattern = "%d{dd MMM yyyy HH:mm:ss} %5p [%t] %l %x :%m%n";	
+	/*private static final String pattern = "%d{dd MMM yyyy HH:mm:ss} %5p [%t] %l %x :%m%n";	
 	private static final PatternLayout layout = new PatternLayout(pattern); 
 	private static RollingFileAppender stdAppender = new RollingFileAppender();
 	private static RollingFileAppender errorAppender = new RollingFileAppender(); 
@@ -62,5 +62,5 @@ public class MessageLogger {
 		l.addAppender(responseAppender);			
 		l.setAdditivity(false);
 		return l;
-	}
+	}*/
 }

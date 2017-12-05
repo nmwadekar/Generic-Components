@@ -18,8 +18,8 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-import org.xmlunit.XMLUnitException;
-import org.xmlunit.diff.DifferenceEvaluator;
+//import org.xmlunit.XMLUnitException;
+//import org.xmlunit.diff.DifferenceEvaluator;
 
 /**
  * @author 58000

@@ -1,4 +1,4 @@
-package nmw.raw;
+package nmw.core.concept;
 
 import java.util.HashSet;
 import java.util.Set;

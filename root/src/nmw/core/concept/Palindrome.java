@@ -1,4 +1,4 @@
-package nmw.core.pet;
+package nmw.core.concept;
 
 public class Palindrome {
 

@@ -1,10 +1,10 @@
-package nmw.ds;
+package nmw.core.concept;
 
 public class Graph {
 
 	public static void main(String[] args) {
 
-		Node n = null;
+		GraphNode n = null;
 		
 		n = insert(n, 9);
 		n = insert(n, 5);
@@ -18,11 +18,11 @@ public class Graph {
 		
 	}
 	
-	public static Node insert(Node currentNode, int value){
+	public static GraphNode insert(GraphNode currentNode, int value){
 		
 		if(currentNode == null){
 			
-			currentNode = new Node(value);
+			currentNode = new GraphNode(value);
 			
 		} else{
 		
