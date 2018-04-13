@@ -8,12 +8,18 @@ public class SquareRootInteger {
 		int x = 16;
 		
 		if( x < 0 || ((x&2) != 0) || ((x & 7) == 5) || ((x & 11) == 8) )
-		    System.out.println(false);
+		    System.out.println("***"+false);
 		if( x == 0 )
-		    System.out.println(true);
+		    System.out.println("###"+true);
 		
 
 		System.out.println(x&2);
+		
+		System.out.println(Integer.toBinaryString(2));
+		
+		System.out.println(Boolean.logicalAnd(true, true));
+		
+		System.out.println(false & true);
 	}
 
 }
