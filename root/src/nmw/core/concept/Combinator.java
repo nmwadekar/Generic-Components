@@ -9,19 +9,21 @@ public class Combinator {
 	
   public static void main(String[] args) {
 	  
-	  find(0, "ABC".toCharArray());
+	  Set<String> output = find(0, "ABC".toCharArray());
 	  
-	  System.out.println("output size "+finalOutput.size() + " : " +finalOutput);
+	  System.out.println("output size "+output.size() + " : " +output);
   }
   
-  public static void find(int key, char[] input){
+  public static Set<String> find(int key, char[] input){
 	  
 	  if(key >= input.length)
-		  return;
+		  return null;
 	  
 	  permute(key, input);
 	  
 	  find(key+1, input);
+	  
+	  return finalOutput;
 	  
   }
   
@@ -29,7 +31,7 @@ public class Combinator {
 	  
 	  char[] o = reduceArray(input, key);
 	  
-//	  System.out.println(String.valueOf(input[key]) + new String(o));
+	  System.out.println(String.valueOf(input[key]) + new String(o));
 	  
 	  finalOutput.add(String.valueOf(input[key]) + new String(o));
 	  
@@ -41,7 +43,7 @@ public class Combinator {
 			  o[i] = o[j];
 			  o[j] = swapper;
 			  
-//			  System.out.println(String.valueOf(input[key])+new String(o));
+			  System.out.println(String.valueOf(input[key])+new String(o));
 			  
 			  finalOutput.add(String.valueOf(input[key])+new String(o));
 		  
