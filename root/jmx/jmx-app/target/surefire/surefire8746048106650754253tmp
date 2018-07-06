@@ -1,0 +1,25 @@
+#surefire
+#Thu Oct 12 23:13:49 IST 2017
+testClassesDirectory=/home/nayan/my_workspace/eclipse_workspace/jmx-app/target/test-classes
+classPathUrl.3=/home/nayan/my_workspace/maven_repository/nmw/core/my-app/0.0.1-SNAPSHOT/my-app-0.0.1-SNAPSHOT.jar
+classPathUrl.2=/home/nayan/my_workspace/maven_repository/junit/junit/3.8.1/junit-3.8.1.jar
+useManifestOnlyJar=true
+classPathUrl.1=/home/nayan/my_workspace/eclipse_workspace/jmx-app/target/classes
+reportsDirectory=/home/nayan/my_workspace/eclipse_workspace/jmx-app/target/surefire-reports
+classPathUrl.0=/home/nayan/my_workspace/eclipse_workspace/jmx-app/target/test-classes
+providerConfiguration=org.apache.maven.surefire.junit.JUnit3Provider
+testSuiteDefinitionTestSourceDirectory=/home/nayan/my_workspace/eclipse_workspace/jmx-app/src/test/java
+surefireClassPathUrl.1=/home/nayan/my_workspace/maven_repository/org/apache/maven/surefire/surefire-api/2.12.4/surefire-api-2.12.4.jar
+surefireClassPathUrl.0=/home/nayan/my_workspace/maven_repository/org/apache/maven/surefire/surefire-junit3/2.12.4/surefire-junit3-2.12.4.jar
+runOrder=filesystem
+useSystemClassLoader=true
+excludes0=**/*$*
+isTrimStackTrace=true
+tc.0=nmw.core.jmx.AppTest
+enableAssertions=true
+includes2=**/*TestCase.java
+failIfNoTests=false
+includes1=**/*Test.java
+runStatisticsFile=/home/nayan/my_workspace/eclipse_workspace/jmx-app/.surefire-000AE19DC3FD6B02B1C05B2EBAFD724DA5C41E30
+includes0=**/Test*.java
+childDelegation=false
