@@ -31,7 +31,13 @@ public class Tree {
 		System.out.println("Minumum Value = " + min(n));
 		System.out.println("Maximum Value = " + max(n));
 		
-		System.out.println("Parent of 8 = " + findParent(n, 8));
+		System.out.println(String.format("Parent of 8 = %d" , findParent(n, 8).index));
+		
+		System.out.println("Before delete 10 = " + n);
+		
+		deleteNode(n, 10);
+		
+		System.out.println("After delete 10 = " + n);
 	}
 
 	public static Node insert(Node currentNode, int value) {
@@ -195,6 +201,19 @@ public class Tree {
 		else return -1;
 	}
 	
+	public static Node minNode(final Node n){
+		
+		if(n != null){
+			
+			if(n.left != null)
+				return minNode(n.left);
+			else return n;
+		}
+		
+		else return null;
+	}
+	
+	
 	public static int max(final Node n){
 		
 		if(n != null){
@@ -207,25 +226,105 @@ public class Tree {
 		else return -1;
 	}
 
-	public static void deleteNode(){
+	public static void deleteNode(Node n, int index){
+		
+		/*Node p = findParent(n, index);
+		
+		System.out.println("Before deletion - " + p);
+		
+		if(p.right != null && p.right.index == index)
+			p.right = null;
+		else if(p.left != null && p.left.index == index)
+			p.left = null;*/
+		
+		
+		
+		Node nodeToDelete = getNodeByIndex(n, index);
+		
+		int deleteN = nodeToDelete.index;
+		
+		Node rightMin = minNode(nodeToDelete.right);
+		
+		int newIndex = rightMin.index;
+		
+		Node p = findParent(n, deleteN);
+		
+		purgeNode(n, nodeToDelete.index);
+		
+		updateNodeNew(p, deleteN, newIndex);
+		
+//		nodeToDelete.index = newIndex;
+		
+
+		
+	}
+	
+	public static void updateNodeNew(Node p, int index, int newIndex){
+		
+		System.out.println("Parent - " + p.index);
+		
+		if(p.right == null && p.index < newIndex){
+			p.right = new Node(newIndex);
+		}
+		else if(p.left == null && p.index > newIndex){
+			
+			p.left = new Node(newIndex);
+		}
+//		System.out.println("After deletion - " + p);
+	}
+	
+	public static void updateNode(Node n, int index, int newIndex){
+		
+		Node p = findParent(n, index);
+		
+		System.out.println("Parent - " + p);
+		
+		if(p.right != null && p.right.index == index){
+			p.right.index = newIndex;
+		}
+		else if(p.left != null && p.left.index == index){
+			
+			p.left.index = newIndex;
+		}
+//		System.out.println("After deletion - " + p);
+	}
+	
+	public static void purgeNode(Node n, int index){
+		
+		Node p = findParent(n, index);
+		
+		System.out.println("Before deletion - " + p);
+		
+		if(p.right != null && p.right.index == index){
+			p.right = null;
+		}
+		else if(p.left != null && p.left.index == index){
+			
+			p.left = null;
+		}
+//		System.out.println("After deletion - " + p);
+	}
+	
+	public static void appendNode(Node n, int index){
 		
 		
 	}
 	
-	public static int findParent(Node n, int index){
+	
+	public static Node findParent(Node n, int index){
 		
-		System.out.println("findParent " + n.index);
+		System.out.println("findParent " + index);
 		
-		int i = -1;
+		Node i = null;
 		
 		if((n.left != null && n.left.index == index) || (n.right != null && n.right.index == index))
-			return n.index;
+			return  n;
 		if(n.right != null)
 			i = findParent(n.right, index);
 		if(n.left != null)
 			i = findParent(n.left, index);
 		
-		return i;
+			return i;
 
 	}
 	
