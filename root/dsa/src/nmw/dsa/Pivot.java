@@ -17,14 +17,14 @@ public class Pivot {
 		int y = input[((input.length) / 2)];
 		int z = input[input.length - 1];
 
-		System.out.println("INPUT = " + x + "\t" + y + "\t" + z);
+//		System.out.println("INPUT = " + x + "\t" + y + "\t" + z);
 
 		int pivot = 0;
 		int mean = (x + y + z) / 3;
 
 		int[] pIn = new int[] { x, y, z };
 
-		System.out.println("MEAN = " + mean);
+//		System.out.println("MEAN = " + mean);
 
 		int difference = Math.abs((pIn[0]) - mean);
 

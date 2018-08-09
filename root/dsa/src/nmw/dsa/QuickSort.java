@@ -1,18 +1,20 @@
 package nmw.dsa;
 
+import java.util.Date;
+
 public class QuickSort {
 
-	private static int PIVOT_INDEX = 0;
+//	private static int PIVOT_INDEX = 0;
 	
 	public static void main(String[] args) {
 
 		int[] input = { 54, 26, 93, 17, 77, 31, 44, 55, 20 };
 
-		// int[] input = {5,2,4,6,1,3};
+//		 int[] input = {5,2,4,6,1,3};
 
-		process(input);
+		input = process(input);
 
-		print(input, "OUTPUT");
+		print(input, "\nOUTPUT");
 	}
 
 	public static int[] process(int[] input) {
@@ -23,61 +25,61 @@ public class QuickSort {
 
 		}
 		
-		PIVOT_INDEX = Pivot.getPivot(input);
+		int PIVOT_INDEX = Pivot.getPivot(input);
 
-		sort(input);
-		
-		System.out.println("Pivot Index after sort = " + PIVOT_INDEX);
+		PIVOT_INDEX = sort(input, PIVOT_INDEX);
 
 		int[][] splitted = divide(input, PIVOT_INDEX);
 
 		int[] part_1 = splitted[0];
 		int[] part_2 = splitted[1];
 
-		print(part_1, "PART_1");
-		print(part_2, "PART_2");
-		
-		process(part_1);
-		process(part_2);
+		print(input, "\nINPUT");
+		printWithoutFormat(new int[]{input[PIVOT_INDEX]}, "PIVOT = ", "");
+		printWithoutFormat(part_1, "\nLEFT = ", "");
+		printWithoutFormat(part_2, "\nRIGHT = ", "\n");
+			
+		part_1 = process(part_1);
+		part_2 = process(part_2);
 		
 		int[] output =join(part_1, part_2, input[PIVOT_INDEX]);
 		
-		print(output, "FINAL INCREMENTAL");
+		print(output, "INCREMENTAL OUTPUT");
 		
 		return output;
 
 	}
 
-	private static int[] sort(int[] input) {
+	private static int sort(int[] input, int pivotIndex) {
 
-		int pivot = input[PIVOT_INDEX];
+		int pivot = input[pivotIndex];
 
 		int l = 0, r = (input.length - 1), left, right, tempo;
 
 		boolean l_swap = false, r_swap = false;
 
-		print(input, "INPUT");
+//		print(input, "INPUT");
 
-		System.out.println("\n PIVOT = " + pivot);
+//		System.out.println("\n PIVOT = " + pivot);
 
 		for (int i = 0; i < input.length; i++) {
 
 			left = input[l];
 			right = input[r];
 
-			print(input, "INPUT");
-			System.out.println("VALUES = " + pivot + "\t" + left + "\t" + right);
-			System.out.println("INDEX  i = " + i + " l=" + l + " r= " + r);
+//			print(input, "INPUT");
+//			System.out.println("VALUES = " + pivot + "\t" + left + "\t" + right);
+//			System.out.println("INDEX  i = " + i + " l=" + l + " r= " + r);
 
 			if (l == r) {
 
 				tempo = input[r];
-				input[r] = input[PIVOT_INDEX];
-				input[PIVOT_INDEX] = tempo;
+				input[r] = input[pivotIndex];
+				input[pivotIndex] = tempo;
 
-				PIVOT_INDEX = r;
+				pivotIndex = r;
 
-				System.out.println("BREAKING at pivot index - " + PIVOT_INDEX);
+//				System.out.println("BREAKING AT PIVOT INDEX = " + pivotIndex + " VALUE = " + input[pivotIndex]);
 
 				break;
 			}
@@ -107,9 +109,9 @@ public class QuickSort {
 			}
 		}
 
-		print(input, "intermediatory output");
+//		print(input, "INTERMEDIATORY OUTPUT");
 
-		return input;
+		return pivotIndex;
 	}
 
 	private static int[][] divide(int[] input, int pivotIndex) {
@@ -129,6 +131,9 @@ public class QuickSort {
 	}
 	
 	private static int[] join(int[] part_1, int[] part_2, int pivot){
+		
+//		print(part_1, new Date() + "PART-1");
+//		print(part_2, new Date() + "PART-2");
 		
 		int total_length = part_1.length + part_2.length + 1;
 		
@@ -159,14 +164,32 @@ public class QuickSort {
 
 	private static void print(int[] input, String text) {
 
-		System.out.print("\n " + text);
+		System.out.print( text + "\t");
 
 		for (int i = 0; i < input.length; i++) {
 
-			System.out.print("\t" + input[i]);
+			System.out.print(input[i] + "\t");
 		}
 
 		System.out.println();
+	}
+	
+	private static void printWithoutFormat(int[] input, String preText, String postText) {
+
+		System.out.print( preText);
+
+		for (int i = 0; i < input.length; i++) {
+
+			System.out.print(input[i] + "\t");
+		}
+
+		System.out.print(postText);
+	}
+	
+	
+	private static void printBanner(String input) {
+		
+		System.out.println("############################### " + input + " ###############################");
 	}
 
 }
