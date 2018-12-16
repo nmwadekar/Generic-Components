@@ -1,15 +1,15 @@
 package net.nmw.rule.data;
 
-import com.trafigura.logistics.persistence.InventoryWeightStatusEnum;
+import net.nmw.persistence.InventoryWeightStatusEnum;
 import net.nmw.rule.AssertionData;
 
-import static com.trafigura.logistics.persistence.InventoryWeightStatusEnum.Blank;
-import static com.trafigura.logistics.persistence.InventoryWeightStatusEnum.DerivedFinal;
-import static com.trafigura.logistics.persistence.InventoryWeightStatusEnum.DerivedProvisional;
-import static com.trafigura.logistics.persistence.WeightStatusEnum.Any;
-import static com.trafigura.logistics.persistence.WeightStatusEnum.OfficialFinal;
-import static com.trafigura.logistics.persistence.WeightStatusEnum.OfficialNotFinal;
-import static com.trafigura.logistics.persistence.WeightStatusEnum.Provisional;
+import static net.nmw.persistence.InventoryWeightStatusEnum.Blank;
+import static net.nmw.persistence.InventoryWeightStatusEnum.DerivedFinal;
+import static net.nmw.persistence.InventoryWeightStatusEnum.DerivedProvisional;
+import static net.nmw.persistence.WeightStatusEnum.Any;
+import static net.nmw.persistence.WeightStatusEnum.OfficialFinal;
+import static net.nmw.persistence.WeightStatusEnum.OfficialNotFinal;
+import static net.nmw.persistence.WeightStatusEnum.Provisional;
 
 /**
  * Created by nayan.wadekar on 26-Oct-2018.

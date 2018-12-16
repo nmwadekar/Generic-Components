@@ -3,8 +3,8 @@ package net.nmw.rule.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.trafigura.logistics.persistence.InventoryEntity;
-import com.trafigura.logistics.persistence.InventoryWeightStatusEnum;
+import net.nmw.persistence.InventoryEntity;
+import net.nmw.persistence.InventoryWeightStatusEnum;
 import net.nmw.rule.RuleHelper;
 import net.nmw.rule.RuleProvider;
 import net.nmw.rule.Step;

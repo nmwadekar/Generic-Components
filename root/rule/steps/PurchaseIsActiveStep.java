@@ -2,7 +2,7 @@ package net.nmw.rule.steps;
 
 import java.util.Map;
 
-import com.trafigura.logistics.persistence.PurchaseAssignmentEntity;
+import net.nmw.persistence.PurchaseAssignmentEntity;
 import net.nmw.rule.RuleHelper;
 import net.nmw.rule.Step;
 

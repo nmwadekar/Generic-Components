@@ -2,8 +2,8 @@ package net.nmw.rule.steps;
 
 import java.util.Map.Entry;
 
-import com.trafigura.logistics.persistence.SalesAssignmentEntity;
-import com.trafigura.logistics.persistence.WeightStatusEnum;
+import net.nmw.persistence.SalesAssignmentEntity;
+import net.nmw.persistence.WeightStatusEnum;
 import net.nmw.rule.RuleHelper;
 import net.nmw.rule.Step;
 

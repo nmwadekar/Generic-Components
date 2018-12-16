@@ -4,9 +4,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import com.trafigura.logistics.persistence.InventoryEntity;
-import com.trafigura.logistics.persistence.InventoryEventTypeEnum;
-import com.trafigura.logistics.persistence.WeightStatusEnum;
+import net.nmw.persistence.InventoryEntity;
+import net.nmw.persistence.InventoryEventTypeEnum;
+import net.nmw.persistence.WeightStatusEnum;
 import net.nmw.rule.RuleHelper;
 import net.nmw.rule.Step;
 

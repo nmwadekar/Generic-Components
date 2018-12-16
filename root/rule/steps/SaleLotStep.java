@@ -4,7 +4,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import com.trafigura.logistics.persistence.SalesAssignmentEntity;
+import net.nmw.persistence.SalesAssignmentEntity;
 import net.nmw.rule.RuleHelper;
 import net.nmw.rule.Step;
 

@@ -6,13 +6,13 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import com.trafigura.logistics.persistence.InventoryEntity;
-import com.trafigura.logistics.persistence.InventoryEventTypeEnum;
-import com.trafigura.logistics.persistence.PurchaseAssignmentEntity;
-import com.trafigura.logistics.persistence.PurchaseAssignmentStatusEnum;
-import com.trafigura.logistics.persistence.SalesAssignmentEntity;
-import com.trafigura.logistics.persistence.SalesAssignmentStatusEnum;
-import com.trafigura.logistics.persistence.WeightStatusEnum;
+import net.nmw.persistence.InventoryEntity;
+import net.nmw.persistence.InventoryEventTypeEnum;
+import net.nmw.persistence.PurchaseAssignmentEntity;
+import net.nmw.persistence.PurchaseAssignmentStatusEnum;
+import net.nmw.persistence.SalesAssignmentEntity;
+import net.nmw.persistence.SalesAssignmentStatusEnum;
+import net.nmw.persistence.WeightStatusEnum;
 
 /**
  * Created by nayan.wadekar on 31-Oct-2018.
