@@ -1,0 +1,184 @@
+package nmw.concurrent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+/**
+ * To verify the dormant/zombie threads remainder after executor finishes
+ * not collected in GC & idling, increasing thread/group count
+ * even after the calling method exists leading to potential leak
+ * <p>
+ * Created by nayan.wadekar on 18-Jan-2019.
+ */
+public class TestThreadPoolExecutor
+{
+    private final String THREAD_PREFIX = "TEST_EXECUTOR";
+    private final String THREAD_PREFIX_CLOSED = THREAD_PREFIX + "_CLOSED";
+    private final int THREAD_COUNT = 4;
+
+    @Test
+    public void unclosedExecutor()
+    {
+        //--    FIRST RUN
+        initiateTasks(false, THREAD_PREFIX);
+        int inactiveThreads = getThreadCount(Thread.currentThread().getThreadGroup(), THREAD_PREFIX);
+
+        Assert.assertEquals(4, inactiveThreads);
+
+        //--    SECOND RUN
+        initiateTasks(false, THREAD_PREFIX);
+        inactiveThreads = getThreadCount(Thread.currentThread().getThreadGroup(), THREAD_PREFIX);
+
+        Assert.assertEquals(8, inactiveThreads);
+    }
+
+    @Test
+    public void closedExecutor()
+    {
+        //--    FIRST RUN
+        initiateTasks(true, THREAD_PREFIX_CLOSED);
+        int inactiveThreads = getThreadCount(Thread.currentThread().getThreadGroup(), THREAD_PREFIX_CLOSED);
+
+        Assert.assertEquals(0, inactiveThreads);
+
+        //--    SECOND RUN
+        initiateTasks(true, THREAD_PREFIX_CLOSED);
+        inactiveThreads = getThreadCount(Thread.currentThread().getThreadGroup(), THREAD_PREFIX_CLOSED);
+
+        Assert.assertEquals(0, inactiveThreads);
+    }
+
+    private void initiateTasks(boolean closable, String threadPrefix)
+    {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(threadPrefix + "-%d").build();
+
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(THREAD_COUNT, THREAD_COUNT,
+            1000, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(),
+            factory);
+
+        List<Future<Integer>> futures = submitTasks(poolExecutor);
+        List<Integer> results = fetchResults(futures);
+
+        Assert.assertTrue(CollectionUtils.isNotEmpty(results) && results.size() == THREAD_COUNT);
+
+        if (closable)
+        {
+            List<Runnable> aliveThreads = poolExecutor.shutdownNow();
+
+            try
+            {
+                Assert.assertTrue(CollectionUtils.isEmpty(aliveThreads));
+                poolExecutor.awaitTermination(2, TimeUnit.SECONDS);
+            }
+            catch (InterruptedException ie)
+            {
+                //--    Issue in handling thread timings
+            }
+
+            Assert.assertTrue(CollectionUtils.isEmpty(aliveThreads));
+        }
+    }
+
+    private int getThreadCount(ThreadGroup group, String threadPrefix)
+    {
+        int count = 0;
+        Thread[] threadsInGroup = new Thread[group.activeCount()];
+        group.enumerate(threadsInGroup, false);
+
+        for (int i = 0; i < threadsInGroup.length; i++)
+        {
+            if (threadsInGroup[i].getName().startsWith(threadPrefix))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private List<Future<Integer>> submitTasks(ExecutorService executor)
+    {
+        TinyJob tinyJob;
+        List<Future<Integer>> output = new ArrayList<>();
+        Future<Integer> tinyResult;
+
+        for (int i = 0; i < THREAD_COUNT; i++)
+        {
+            tinyJob = new TinyJob(new int[]{i, i + 1, i + 2, i + 3});
+            tinyResult = executor.submit(tinyJob);
+            output.add(tinyResult);
+        }
+
+        return output;
+    }
+
+    /*
+       Blocking call to fetch job output
+    */
+    private List<Integer> fetchResults(List<Future<Integer>> output)
+    {
+        List<Integer> threadResult = new ArrayList<>();
+
+        try
+        {
+            //-- Can't timeout earlier than Tiny can complete, else would end in exception
+            for (Future<Integer> fu : output)
+            {
+                threadResult.add(fu.get(6000, TimeUnit.MILLISECONDS));
+            }
+        }
+        catch (InterruptedException | ExecutionException | TimeoutException ex)
+        {
+            //--    Issue in handling thread timings
+        }
+
+        return threadResult;
+    }
+
+    private class TinyJob implements Callable<Integer>
+    {
+        private int[] input;
+
+        public TinyJob(int... args)
+        {
+            input = args;
+        }
+
+        /**
+         * Computes a result, or throws an exception if unable to do so.
+         *
+         * @return computed result
+         * @throws Exception if unable to compute a result
+         */
+        @Override
+        public Integer call() throws Exception
+        {
+            int output = 0;
+
+            for (int i = 0; i < input.length; i++)
+            {
+                output += input[i];
+            }
+
+            Thread.currentThread().sleep(5000); // Tiny thread resting
+
+            return Integer.valueOf(output);
+        }
+    }
+}
