@@ -1,0 +1,163 @@
+package nmw.euler.fourteen;
+
+import java.util.TreeMap;
+
+public class CollatzConjecture {
+
+	long[] path;
+	Node n = this.new Node(1, null);
+	
+	private static TreeMap<Long, Node> resultant = new TreeMap<>();
+	private static long maxSequenceCount = 0l;
+	private static long maxIndex = 0l;
+	
+	public static void main(String[] args) {
+
+		CollatzConjecture c = new CollatzConjecture();
+		
+		long tempMax = 0l;
+		
+		for(long i =1; i <= 1000000; i++){
+			
+			Node n = c.new Node(i);
+			
+			c.compute(n);
+			
+			resultant.put(i, n);
+			
+			tempMax = getCount(n);
+			
+			if(tempMax > maxSequenceCount){
+				
+				maxSequenceCount = tempMax;
+				maxIndex = i;
+			}
+		}
+		
+		System.out.println("Element = " + maxIndex + " Count = " + maxSequenceCount);
+	}
+	
+	public Node traversal(Node input, long value){
+		
+		if(input.value != value && input.next != null){
+			
+			traversal(input.next, value);
+		}
+		
+		return input;
+	}
+	
+	public Node traversal(long value, Node parent){
+		
+		Node child = null;
+		
+		if(resultant.containsKey(value)){
+			
+			child =  resultant.get(value);
+			
+		}else{
+			
+			child =  new Node(value);
+		}
+		
+		parent.add(parent, child);
+		
+		return child;
+	}
+	
+	public Node compute(Node input){
+		
+		long value = input.value;
+		
+		while(value != 1){
+		
+			if(value %2 == 0){
+				
+				value = value/2;
+				
+			}else{
+				
+				value = (3*value) + 1;
+			}
+			
+			Node current = traversal(value, input);
+			
+			Node tail = getTailNodeWhile(current);
+			
+			value = tail.value;
+			
+		}
+		
+		return input;
+	}
+	
+	public Node getTailNode(Node input){
+		
+		if(input != null && input.next != null){
+			
+			getTailNode(input.next);
+		}
+		
+		return input;
+	}
+	
+	public Node getTailNodeWhile(Node input){
+		
+		while(input.next != null){
+			
+			input = input.next;
+		}
+		
+		return input;
+	}
+	
+	public static long getCount(Node input){
+		
+		long i = 1;
+		
+		while(input.next != null){
+			
+			input = input.next;
+			
+			++i;
+		}
+		
+		return i;
+	}
+	
+	public class Node {
+		
+		long value;
+		Node next;
+		
+		public Node(long value, Node next){
+			
+			this.value = value;
+			this.next = next;
+		}
+		
+		public Node(long value){
+			
+			this.value = value;
+		}
+		
+		public void add(Node parent, Node child){
+			
+			if(parent.next == null){
+				
+				parent.next = child;
+				
+			}else{
+				
+				add(parent.next, child);
+			}
+		}
+
+		@Override
+		public String toString() {
+			return  value + ", " + next;
+		}
+		
+	}
+
+}
