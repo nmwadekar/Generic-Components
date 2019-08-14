@@ -1,0 +1,86 @@
+package nmw.euler.twentyeight;
+
+public class SpiralDiagonal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		/*int x=0,y =0, n=1;
+		
+		for (int i =1; i <=15; i++){
+			
+			System.out.println(String.format("[%d] [%d] = [%d], n = %d", x, y, i, n));
+			
+			
+			switch (n) {
+			case 1:
+				x+=1;
+				break;
+			case 2:
+				y-=1;
+				break;
+			case 3:
+				x-=1;
+				break;
+			case 4:
+				x-=1;
+				break;
+			case 5:
+				y+=1;
+				break;
+			case 6:
+				y=y+1;
+				break;
+			case 7:
+				x+=1;
+				break;
+
+			default:
+				n = n%8 == 0? 0 : n;
+				x+=1;
+				break;
+			}
+			++n;
+			
+//			System.out.println(String.format("[%d] [%d] = [%d], n = %d", x, y, i, n));
+		}*/
+		
+		long a = 0l;
+		
+		for(long i=1; i<= 5; i+=2){
+			
+			System.out.println("a = " + a + " i = " + i);
+			
+			a += i*i;
+			
+			System.out.println("post a = " + a);
+		}
+		
+		long b = 0l;
+		
+		for(long i=0; i< 3; i++){
+			
+			System.out.println("b = " + b + " i = " + i);
+			
+			b += (Math.pow(4, i) + 1);
+			
+			System.out.println("post b = " + b);
+		}
+		
+		System.out.println((a+b) * 2);
+		
+		float l = 1;
+		
+		for(float i=40; i>= 21; i--){
+			
+			l = l*i;
+			
+			System.out.println("nooooooo  " + l + " i = " + i);
+			
+		}
+		
+		System.out.println("nooooooo  " + l);
+		
+	}
+
+}
