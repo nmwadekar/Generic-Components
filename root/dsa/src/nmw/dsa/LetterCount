@@ -1,0 +1,269 @@
+package nmw.euler.seventeen;
+
+public class LetterCounts {
+
+	public static void main(String... s) {
+
+		String output = null;
+		long finalLength = 0;
+
+		for (int i = 1; i <= 1000; i++) {
+
+			output = compute(i);
+
+			finalLength += letterCount(output);
+			
+			System.out.println("Inter length = " + finalLength);
+		}
+
+		System.out.println("Final length = " + finalLength);
+	}
+
+	private static long letterCount(String input) {
+
+		String[] words = input.trim().split(" ");
+		long output = 0;
+
+		for (int i = 0; i < words.length; i++) {
+			output += words[i].trim().length();
+			
+//			System.out.println("INPUT = " +  words[i] + " size = " + words[i].length());
+		}
+		
+		System.out.println("INPUT = " + input + " \t\tsize = " + output);
+
+		return output;
+	}
+
+	private static String compute(int input) {
+
+		int[] digits = digits(input);
+
+		String output = " ";
+		int i = 0;
+		String tempo = "";
+
+		int length = digits.length;
+
+		switch (length) {
+
+		case 4:
+			output += number(digits[i++]);
+			output += " " + tens(length--);
+		case 3:
+			tempo = number(digits[i++]);
+			output += tempo.length() >0 ? tempo + " " + tens(length) : "";
+		case 2:
+
+			if (length > 2 && i > 0 && (digits[i] == 0 && digits[i + 1] == 0)) {
+
+				tempo = "";
+
+			} else if (length > 2 && i > 0) {
+
+				tempo = " AND ";
+			}
+
+			if (digits[i] == 1 && digits[i + 1] != 0) {
+
+				tempo += ones(digits[i++] + "" + digits[i++]);
+
+				output += tempo;
+
+				break;
+			} else {
+
+				tempo += ties(digits[i++]);
+
+				output += tempo;
+
+				if (digits[i] == 0) {
+					break;
+				}
+			}
+
+		case 1:
+
+			tempo = number(digits[i++]);
+			output += " " + tempo;
+		}
+
+//		System.out.println(input + " = " + output);
+
+		return output;
+	}
+
+	private static int count(int input) {
+
+		int count = 0;
+
+		while (input != 0) {
+
+			input = input / 10;
+
+			++count;
+		}
+
+		return count;
+	}
+
+	private static int[] digits(int input) {
+		int[] count = new int[count(input)];
+
+		int i = count.length;
+
+		while (input != 0) {
+
+			count[--i] = input % 10;
+
+			input = input / 10;
+		}
+
+		return count;
+	}
+
+	private static void printArray(int[] input) {
+
+		for (int i = 0; i < input.length; i++) {
+
+			System.out.print(" " + input[i]);
+		}
+	}
+
+	private static String ties(int i) {
+
+		String output = "";
+
+		switch (i) {
+		case 1:
+			output = "TEN";
+			break;
+		case 2:
+			output = "TWENTY";
+			break;
+		case 3:
+			output = "THIRTY";
+			break;
+		case 4:
+			output = "FORTY";
+			break;
+		case 5:
+			output = "FIFTY";
+			break;
+		case 6:
+			output = "SIXTY";
+			break;
+		case 7:
+			output = "SEVENTY";
+			break;
+		case 8:
+			output = "EIGHTY";
+			break;
+		case 9:
+			output = "NINETY";
+			break;
+		}
+
+		return output;
+	}
+
+	private static String number(int i) {
+
+		String output = "";
+
+		switch (i) {
+		case 1:
+			output = "ONE";
+			break;
+		case 2:
+			output = "TWO";
+			break;
+		case 3:
+			output = "THREE";
+			break;
+		case 4:
+			output = "FOUR";
+			break;
+		case 5:
+			output = "FIVE";
+			break;
+		case 6:
+			output = "SIX";
+			break;
+		case 7:
+			output = "SEVEN";
+			break;
+		case 8:
+			output = "EIGHT";
+			break;
+		case 9:
+			output = "NINE";
+			break;
+		}
+
+		return output;
+	}
+
+	private static String ones(String i) {
+
+		String output = "";
+
+		switch (Integer.valueOf(i)) {
+		case 10:
+			output = "TEN";
+			break;
+		case 11:
+			output = "ELEVEN";
+			break;
+		case 12:
+			output = "TWELVE";
+			break;
+		case 13:
+			output = "THIRTEEN";
+			break;
+		case 14:
+			output = "FOURTEEN";
+			break;
+		case 15:
+			output = "FIFTEEN";
+			break;
+		case 16:
+			output = "SIXTEEN";
+			break;
+		case 17:
+			output = "SEVENTEEN";
+			break;
+		case 18:
+			output = "EIGHTEEN";
+			break;
+		case 19:
+			output = "NINETEEN";
+			break;
+		}
+
+		return output;
+	}
+
+	private static String tens(int length) {
+
+		String output = "";
+
+		switch (length) {
+
+		case 3:
+
+			output = "HUNDRED";
+
+			break;
+
+		case 4:
+
+			output = "THOUSAND";
+
+			break;
+
+		}
+
+		return output;
+	}
+}
