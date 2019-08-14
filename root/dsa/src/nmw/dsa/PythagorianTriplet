@@ -1,0 +1,22 @@
+package nmw.euler.nine;
+
+public class PythagorianTriplet {
+
+	public static void main(String[] args) {
+		
+		searchStop:
+		for(long i = 1; i < 500; i++){
+			for(long j=1; j < 500; j++){
+				
+				long k = 1000 - i - j;
+					
+					if(i*i + j*j == k*k && i+j+k == 1000){
+						
+						System.out.println("Ouput = " + (i*j*k));
+						System.out.println("i= " + i + "j="+j + "k="+k);
+						break searchStop;
+					}
+			}
+		}
+	}
+}
