@@ -1,0 +1,85 @@
+package nucleus;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map.Entry;
+
+public class OrderedFraction {
+
+	public static void main(String[] args) {
+
+		String output = "";
+
+		List<Entry<Integer, Integer>> fractions = new ArrayList<>();
+
+		float pivot = (float) 3 / 7;
+		
+		int limit = 1000000;
+
+		for (int i = 1; i <= limit; i++) {
+
+			for (int j = i + 1; j <= limit; j++) {
+
+				if (!HCF(i, j)) {
+
+					output += " " + i + "/" + j;
+
+					if ((float) i / j <= (pivot)) {
+
+						fractions.add(new SimpleEntry(i, j));
+					}
+
+				}
+			}
+		}
+
+		System.out.println("OUTPUT = " + output);
+
+		sortFraction(fractions);
+	}
+
+	private static boolean HCF(int n, int d) {
+
+		int[] prime = { 2, 3, 5, 7, 11, 13 };
+
+		boolean output = false;
+
+		for (int i = 0; i < prime.length && !output; i++) {
+
+			output = isDivisible(n, d, prime[i]);
+		}
+
+		return output;
+	}
+
+	private static boolean isDivisible(int n, int d, int divisor) {
+
+		boolean output = n % d == 0 || (n % divisor == 0 && d % divisor == 0);
+
+		return output;
+	}
+
+	private static void sortFraction(List<Entry<Integer, Integer>> input) {
+
+		CompareFraction comparator = new CompareFraction();
+
+		Collections.sort(input, comparator);
+
+		System.out.println(input);
+	}
+
+	private static class CompareFraction implements Comparator<Entry<Integer, Integer>> {
+
+		@Override
+		public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
+
+			Float f1 = (float) o1.getKey() / o1.getValue();
+			Float f2 = (float) o2.getKey() / o2.getValue();
+
+			return f1.compareTo(f2);
+		}
+	}
+}
