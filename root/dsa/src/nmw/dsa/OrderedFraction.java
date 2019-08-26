@@ -1,7 +1,5 @@
 package nucleus;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,32 +11,32 @@ public class OrderedFraction {
 
 		String output = "";
 
-		List<Entry<Integer, Integer>> fractions = new ArrayList<>();
+//		List<Entry<Integer, Integer>> fractions = new ArrayList<>();
 
-		float pivot = (float) 3 / 7;
-		
+		float tempo = 0, upper = (float) 3 / 7, lower = ((float) 3 / 8), gotIt = lower;
+
 		int limit = 1000000;
+		
+//		SimpleEntry<Integer, Integer>  finalOutput = null;
 
-		for (int i = 1; i <= limit; i++) {
+		for (int i = limit; i > 0 ; i--) {
 
-			for (int j = i + 1; j <= limit; j++) {
+			for (int j = limit; j > i && j != i; j--) {
 
-				if (!HCF(i, j)) {
+				tempo = (float) i / j;
 
-					output += " " + i + "/" + j;
+				if (tempo > lower && tempo < upper && fractionHCF(i, j)) {
 
-					if ((float) i / j <= (pivot)) {
-
-						fractions.add(new SimpleEntry(i, j));
+					if(tempo > gotIt) {
+						
+						gotIt = tempo;
+						output = i+"/"+j;
 					}
-
 				}
 			}
 		}
 
-		System.out.println("OUTPUT = " + output);
-
-		sortFraction(fractions);
+		 System.out.println("OUTPUT = " + output + " = " + gotIt );
 	}
 
 	private static boolean HCF(int n, int d) {
@@ -81,5 +79,46 @@ public class OrderedFraction {
 
 			return f1.compareTo(f2);
 		}
+	}
+	
+	private static int[] getPrimes(int limit) {
+		
+		int[] output = new int[] {};
+		
+		for(int i=0; i <= limit/2; i++) {
+			
+		}
+		
+		return output;
+	}
+	
+	private static boolean isPrime(int limit) {
+		
+		int j = 0;
+		
+		for(int i=2; i <= limit/2 && j < 2; i++) {
+			
+			if(limit/i == 0) {
+				
+				j+=1;
+			}
+		}
+		
+		return j == 1;
+	}
+	
+	
+	private static boolean fractionHCF(int i, int j) {
+		
+		int o = 1;
+		
+		for(int k = 2; o < 2 && (i%k ==0 && j%k == 0) && k <= (i+j)/2; k++) {
+			
+				o += 1;
+		}
+		
+//		System.out.println(String.format("HCF for %d/%d = %d", i, j, o));
+		
+		return o == 1;
 	}
 }
