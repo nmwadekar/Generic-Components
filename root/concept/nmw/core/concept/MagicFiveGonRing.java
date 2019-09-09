@@ -1,220 +1,259 @@
-package nmw.core.concept;
+package nmw.dsa;
 
 import java.util.*;
 
 public class MagicFiveGonRing {
 
-    private static Combinator combinor = new Combinator();
+	private static Combinator combinor = new Combinator();
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-//        List<int[]> intComb = null;
-//        Set<String[]> combinations = null;
+		// List<int[]> intComb = null;
+		// Set<String[]> combinations = null;
 
-        Set<String[]> combinations = combinor.find(0, new String[]{"1", "2", "3", "4", "5", "6"});
+		Set<String[]> combinations = Combinator.find(0, new String[] { "1", "2", "3", "4", "5", "6" });
 
-        combinor.resetOutput();
+		combinor.resetOutput();
 
-//        ArithmeticEvaluator.printx(combinations);
+		// ArithmeticEvaluator.printx(combinations);
 
-        List<int[]> intComb = convert(combinations);
+		List<int[]> intComb = convert(combinations);
 
-//        formThreeRing(intComb);
+		// formThreeRing(intComb);
 
-        processThreeRing(combinations);
+		processThreeRing(combinations);
 
-        //--     FOR 5 RING
-        /*
-        combinations = combinor.find(0, new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"});
+		// -- FOR 5 RING
+		/*
+		 * combinations = combinor.find(0, new String[]{"1", "2", "3", "4", "5",
+		 * "6", "7", "8", "9", "10"});
+		 * 
+		 * ArithmeticEvaluator.printx(combinations);
+		 * 
+		 * intComb = convert(combinations);
+		 * 
+		 * formFiveRing(intComb);
+		 */
+	}
 
-        ArithmeticEvaluator.printx(combinations);
+	private static void formThreeRing(List<int[]> input) {
 
-        intComb = convert(combinations);
+		String format = "%d %d %d, %d %d %d, %d %d %d";
 
-        formFiveRing(intComb);
-        */
-    }
+		for (int[] i : input) {
 
-    private static void formThreeRing(List<int[]> input) {
+			if ((i[0] + i[1] + i[2]) == (i[3] + i[2] + i[4]) && (i[3] + i[2] + i[4]) == i[5] + i[4] + i[1]) {
 
-        String format = "%d %d %d, %d %d %d, %d %d %d";
+				System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[1]));
 
-        for (int[] i : input) {
+			}
+		}
+	}
 
-            if ((i[0] + i[1] + i[2]) == (i[3] + i[2] + i[4]) && (i[3] + i[2] + i[4]) == i[5] + i[4] + i[1]) {
+	private static void processThreeRing(Set<String[]> input) {
 
-                System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[1]));
+		// String format = "%d %d %d, %d %d %d, %d %d %d";
+		String format = "%s, %s, %s";
 
-            }
-        }
-    }
+		String[][] resultant/* = new String[3][] */;
 
-    private static void processThreeRing(Set<String[]> input) {
+		String[] a, b, c;
 
-//        String format = "%d %d %d, %d %d %d, %d %d %d";
-        String format = "%s, %s, %s";
+		Set<String[]> combineSet = Combinator.find(0, new String[] { "0", "1", "2" });
 
-        String[] a, b, c;
+		List<String[]> combineList = new ArrayList<String[]>(combineSet);
 
-        for (String[] i : input) {
+		for (String[] i : input) {
 
-            a = new String[]{i[0], i[1], i[2]};
-            b = new String[]{i[3], i[2], i[4]};
-            c = new String[]{i[5], i[4], i[1]};
+			a = new String[] { i[0], i[1], i[2] };
+			b = new String[] { i[3], i[2], i[4] };
+			c = new String[] { i[5], i[4], i[1] };
 
-            if ((i[0] + i[1] + i[2]) == (i[3] + i[2] + i[4]) && (i[3] + i[2] + i[4]) == i[5] + i[4] + i[1]) {
+			resultant = new String[][] { a, b, c };
 
-//                System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[1]));
+			for (String[] s : Collections.unmodifiableCollection(combineList)) {
 
-                System.out.println("GOT iT = " + String.format(format, a, b, c));
+				permuteThree(resultant[Integer.valueOf(s[0])], resultant[Integer.valueOf(s[1])],
+						resultant[Integer.valueOf(s[2])]);
+			}
 
-            }
+			// permuteThree(a, b, c);
+		}
+	}
 
-            permuteThree(a, b, c);
-        }
-    }
+	private static Set<String[][]> permuteThree(String[]... input) {
 
-    private static Set<String[]> permuteThree(String[]... input) {
+		// Set<String> resultant = new HashSet<>();
+		Set<String[][]> resultant = new HashSet<>();
+		String[][] tempo;
+		String[] junk;
 
-        Set<String[]> resultant = new HashSet<>();
-        String[] tempo;
+		String[] a = input[0];
+		String[] b = input[1];
+		String[] c = input[2];
 
-        String[] a = input[0];
-        String[] b = input[1];
-        String[] c = input[2];
+		List<String[]> aP = new ArrayList<>(Combinator.find(0, a));
+		Combinator.resetOutput();
 
-        int[] ia = convert(a);
-        int[] ib = convert(b);
-        int[] ic = convert(c);
+		List<String[]> bP = new ArrayList<>(Combinator.find(0, b));
+		Combinator.resetOutput();
 
+		List<String[]> cP = new ArrayList<>(Combinator.find(0, c));
+		Combinator.resetOutput();
 
-/*        if ((ia[0] + ia[1] + ia[2]) == (ib[0] + ib[1] + ib[2]) && (ib[0] + ib[1] + ib[2]) == ic[0] + ic[1] + ic[2]) {
+		for (int i = 0; i < aP.size(); i++) {
 
-//                System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[1]));
+			for (int j = 0; j < bP.size(); j++) {
 
-//            System.out.println("GOT iT = "+ String.format("%s%s%s",convert(a),convert(b),convert(c)));
+				for (int k = 0; k < cP.size(); k++) {
 
-            ArithmeticEvaluator.print(convert(a));
-            ArithmeticEvaluator.print(convert(b));
-            ArithmeticEvaluator.print(convert(c));
-        }*/
+					if (((Integer.valueOf(aP.get(i)[0]) + Integer.valueOf(aP.get(i)[1])
+							+ Integer.valueOf(aP.get(i)[2])) == ((Integer.valueOf(bP.get(j)[0])
+									+ Integer.valueOf(bP.get(j)[1]) + Integer.valueOf(bP.get(j)[2]))))
+							&& ((Integer.valueOf(cP.get(k)[0]) + Integer.valueOf(cP.get(k)[1])
+									+ Integer.valueOf(cP.get(k)[2])) == ((Integer.valueOf(bP.get(j)[0])
+											+ Integer.valueOf(bP.get(j)[1]) + Integer.valueOf(bP.get(j)[2]))))) {
 
-        List<String[]> aP = new ArrayList(combinor.find(0, a));
-        combinor.resetOutput();
+						if ((aP.get(i)[2].equals(bP.get(j)[1])) && (cP.get(k)[1].equals(bP.get(j)[2]))
+								&& (cP.get(k)[2].equals(aP.get(i)[1]))) {
 
-        List<String[]> bP = new ArrayList(combinor.find(0, b));
-        combinor.resetOutput();
+							junk = combine(aP.get(i), bP.get(j), cP.get(k));
 
-        List<String[]> cP = new ArrayList(combinor.find(0, c));
-        combinor.resetOutput();
+							tempo = new String[][] { aP.get(i), bP.get(j), cP.get(k) };
 
-        for (int i = 0; i < aP.size(); i++) {
+							// resultant.add(toString(tempo));
+							resultant.add(tempo);
 
-            for (int j = 0; j < bP.size(); j++) {
+							System.out.println("########################## GOT IT " + toString(junk));
+						}
+					}
 
-                for (int k = 0; k < cP.size(); k++) {
+				}
+			}
 
-                    if( ((Integer.valueOf(aP.get(i)[0]) + Integer.valueOf(aP.get(i)[1]) + Integer.valueOf(aP.get(i)[2])) ==
-                            ((Integer.valueOf(bP.get(i)[0]) + Integer.valueOf(bP.get(i)[1]) + Integer.valueOf(bP.get(i)[2])))) &&
-                            ((Integer.valueOf(cP.get(i)[0]) + Integer.valueOf(cP.get(i)[1]) + Integer.valueOf(cP.get(i)[2])) ==
-                                    ((Integer.valueOf(bP.get(i)[0]) + Integer.valueOf(bP.get(i)[1]) + Integer.valueOf(bP.get(i)[2]))))
-                                         ) {
+		}
+		
+		fetchUnique(resultant);
 
+		// ArithmeticEvaluator.printSet(resultant);
 
+		return resultant;
+	}
 
+	private static void fetchUnique(Set<String> input, int size) {
 
-                        tempo = combine(aP.get(i), bP.get(j), cP.get(k));
+		List<String> lInput = new ArrayList<String>(input);
 
-                        /*if ((tempo[0] +tempo[1] + tempo[2]) == (tempo[3] + tempo[4] + tempo[5]) &&
-                                (tempo[3] + tempo[4] + tempo[5]) == tempo[6] + tempo[7] + tempo[8]){
-*/
-                            resultant.add(tempo);
-//                        }
+		for (int i = 0; i < input.size(); i += size) {
 
+			for (int j = i; j < i + size; j++) {
 
-//                System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[1]));
-                    }
+			}
+		}
+	}
+	
+	private static String[][] fetchUnique(Set<String[][]> input){
+		
+		String[][] output = new String[input.size()][];
+		
+		for(String[][] s : input) {
+			
+			for(int i=0; i < s.length; i++) {
+				
+			}
+		}
+		
+		
+		return output;
+	}
 
-                }
-            }
+	private static String toString(String[] input) {
 
-        }
+		StringBuilder output = new StringBuilder();
 
-        ArithmeticEvaluator.printx(resultant);
+		for (int i = 0; i < input.length; i++) {
 
-        return resultant;
-    }
+			output.append(input[i]);
+		}
 
-    private static String[] combine(String[]... input) {
+		return output.toString();
+	}
 
-        String[] tempo, output = new String[input.length * input[0].length];
+	private static Set<String> concatenateArray(Set<String[]> input) {
 
-        int n = 0;
+		Set<String> output = new HashSet<>();
 
-        for (int i = 0; i < input.length; i++) {
+		for (String[] s : input) {
 
-            tempo = input[i];
+			output.add(Arrays.toString(s));
+		}
 
-            for (int j = 0; j < tempo.length; j++) {
+		return output;
+	}
 
-                output[n++] = tempo[j];
-            }
-        }
+	private static String[] combine(String[]... input) {
 
-        return output;
-    }
+		String[] tempo, output = new String[input.length * input[0].length];
 
+		int n = 0;
 
-    private static int[] convert(String[] input) {
+		for (int i = 0; i < input.length; i++) {
 
-        int[] output = new int[input.length];
+			tempo = input[i];
 
-        for (int i = 0; i < input.length; i++) {
+			for (int j = 0; j < tempo.length; j++) {
 
-            output[i] = Integer.valueOf(input[i]);
-        }
+				output[n++] = tempo[j];
+			}
+		}
 
-        return output;
-    }
+		return output;
+	}
 
+	private static int[] convert(String[] input) {
 
-    private static void formFiveRing(List<int[]> input) {
+		int[] output = new int[input.length];
 
-        String format = "%d %d %d,%d %d %d,%d %d %d,%d %d %d,%d %d %d";
+		for (int i = 0; i < input.length; i++) {
 
-        for (int[] i : input) {
+			output[i] = Integer.valueOf(input[i]);
+		}
 
-//            ArithmeticEvaluator.print(i);
+		return output;
+	}
 
-            int a = i[0] + i[1] + i[2];
-            int b = i[3] + i[2] + i[4];
-            int c = i[5] + i[4] + i[6];
-            int d = i[7] + i[6] + i[8];
-            int e = i[9] + i[8] + i[1];
+	private static void formFiveRing(List<int[]> input) {
 
-            if ((a == b) && (b == c) && (c == d) && (d == e)) {
+		String format = "%d %d %d,%d %d %d,%d %d %d,%d %d %d,%d %d %d";
 
-                System.out.println(String.format(format,
-                        i[0], i[1], i[2],
-                        i[3], i[2], i[4],
-                        i[5], i[4], i[6],
-                        i[7], i[6], i[8],
-                        i[9], i[8], i[1]));
+		for (int[] i : input) {
 
-            }
-        }
-    }
+			// ArithmeticEvaluator.print(i);
 
+			int a = i[0] + i[1] + i[2];
+			int b = i[3] + i[2] + i[4];
+			int c = i[5] + i[4] + i[6];
+			int d = i[7] + i[6] + i[8];
+			int e = i[9] + i[8] + i[1];
 
-    private static List<int[]> convert(Set<String[]> input) {
+			if ((a == b) && (b == c) && (c == d) && (d == e)) {
 
-        List<int[]> output = new ArrayList<>(input.size());
+				System.out.println(String.format(format, i[0], i[1], i[2], i[3], i[2], i[4], i[5], i[4], i[6], i[7],
+						i[6], i[8], i[9], i[8], i[1]));
 
-        for (String[] s : input) {
+			}
+		}
+	}
 
-            output.add(convert(s));
-        }
+	private static List<int[]> convert(Set<String[]> input) {
 
-        return output;
-    }
+		List<int[]> output = new ArrayList<>(input.size());
+
+		for (String[] s : input) {
+
+			output.add(convert(s));
+		}
+
+		return output;
+	}
 }
