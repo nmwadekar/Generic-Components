@@ -1,0 +1,109 @@
+package nmw.euler.twothreefour;
+
+//-- Euler problem-234 [https://projecteuler.net/problem=234]
+
+public class SemiDivisible {
+
+	public static void main(String[] args) {
+
+		long limit = 999966663333l;
+//		long limit = 1000;
+		long output = 0;
+		long i = 0;
+		
+//		System.out.println((long)(4.8));
+
+		for (long n = 4; n <= limit; n++) {
+
+			double n_sq_root = Math.sqrt(n);
+			
+			long lps = getLowerPrime(n_sq_root);
+			long ups = getUpperPrime(n_sq_root);
+			
+//			System.out.println(String.format("LPS = %d UPS = %d for sqrt = %f for n = %d", lps, ups,n_sq_root, n ));
+			
+			if((lps != 0 && ups != 0) &&   (n % lps == 0) ^ (n % ups == 0)){
+				
+				++i;
+				
+				System.out.println(String.format("%d #### LPS = %d UPS = %d for sqrt = %f for n = %d", i, lps, ups,n_sq_root, n ));
+				
+				
+				output += n;
+			}
+			
+			/*if(i == 92){
+				break;
+			}*/
+		}
+
+		System.out.println("Final output = " + output);
+		
+	}
+
+	private static long getLowerPrime(double input) {
+
+//		System.out.println("finding LPS = " + input);
+		
+		for(long i= (int) input; i >= 0; i--){
+			
+			if(isPrime(i)){
+				
+//				System.out.println("Found LPS = " + i);
+				
+				return i;
+			}
+		}
+		
+		return 0;
+		
+	}
+
+	private static long getUpperPrime(double input) {
+
+//		System.out.println("finding UPS = " + input);
+		
+		long start = (long)input;
+		
+		if(input != Math.round(input)){
+			
+			start++;
+		}
+		
+		for(long i= start; i >= input ; i++){
+			
+			if(isPrime(i)){
+				
+//				System.out.println("Found UPS = " + i);
+				
+				return i;
+			}
+		}
+		
+		return 0;
+		
+	}
+
+
+	private static boolean isPrime(long input) {
+
+//		System.out.println("Finding prime for = " + input);
+
+		if(input == 2){
+			return true;
+		}else if (input <= 1){
+			return false;
+		}
+		
+		for (long i = 2; i <= input / 2; i++) {
+
+			if (input % i == 0 && i != input) {
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+}
