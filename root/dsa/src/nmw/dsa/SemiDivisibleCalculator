@@ -1,0 +1,38 @@
+package nmw.euler.twothreefour;
+
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+
+/*
+* https://projecteuler.net/problem=234
+*/
+public class SemiDivisibleCalculator {
+
+	private static LinkedBlockingQueue<Runnable> sequence = new LinkedBlockingQueue(500);
+	private static LinkedBlockingQueue<Long> output = new LinkedBlockingQueue(500);
+	private volatile static AtomicLong finalResult = new AtomicLong(0l);
+	private static ThreadPoolExecutor executor = new ThreadPoolExecutor(100, 200, 2000l, TimeUnit.MILLISECONDS, sequence);
+	
+
+	public static void main(String[] args) throws InterruptedException {
+
+		SequenceGenerator s_generator = new SequenceGenerator(output, sequence);
+		SemiDivisibleConsumer s_consumer = new SemiDivisibleConsumer(output, finalResult);
+		
+		
+		Thread p_thread = new Thread(s_generator);
+		Thread s_thread = new Thread(s_consumer);
+		
+		p_thread.start();
+		
+		Thread.sleep(2000l);
+		
+		s_thread.start();
+		
+		executor.prestartAllCoreThreads();
+		
+	}
+
+}
