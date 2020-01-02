@@ -1,0 +1,43 @@
+package nmw.euler;
+
+import java.util.Date;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
+/*
+last one calculated = 3471882815855468
+lates               =    1306798291868
+                        10090715031756
+                         1994323996486 =     329615091[9-21:00]
+                        36615727260524 =    2293640291[21:09-10]
+                        151467294736896 =   5910458173[21:30-10]
+                        334735293847436 =  10028279707[21:56-11]
+ */
+
+public class PrintIntrimOutput implements Runnable {
+
+    private AtomicLong output;
+    private final BlockingQueue<Long> divisibles;
+    private final BlockingQueue<Runnable> workQueue;
+
+    public PrintIntrimOutput(AtomicLong output, BlockingQueue<Long> divisibles, BlockingQueue<Runnable> work) {
+        this.output = output;
+        this.divisibles = divisibles;
+        this.workQueue = work;
+    }
+
+    @Override
+    public void run() {
+
+        while(true){
+
+            System.out.println(new Date() +"] o = "+output.get() + ", n = " + divisibles.peek() + " for = " + workQueue.peek());
+
+            try {
+                Thread.sleep(20000l);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
