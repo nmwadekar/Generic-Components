@@ -1,40 +1,42 @@
-package nmw.euler.twothreefour;
+package nmw.euler;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class SequenceGenerator implements Runnable {
 
-	private static long limit = 999966663333l;
-//	private static long limit = 1000l;
+    private static long limit = 999966663333l;
+//	private static long limit = 100l;
 //	private static long limit = 15l;
 
-	private LinkedBlockingQueue<Long> output;
-	private LinkedBlockingQueue<Runnable> sequence;
+    private LinkedBlockingQueue<Long> output;
+    private LinkedBlockingQueue<Runnable> sequence;
 
-	public SequenceGenerator(LinkedBlockingQueue<Long> output, LinkedBlockingQueue<Runnable> sequence) {
-		super();
-		this.output = output;
-		this.sequence = sequence;
-	}
+    public SequenceGenerator(LinkedBlockingQueue<Long> output, LinkedBlockingQueue<Runnable> sequence) {
+        super();
+        this.output = output;
+        this.sequence = sequence;
+    }
 
-	@Override
-	public void run() {
+    @Override
+    public void run() {
 
-		try {
-			
-			for (long i = 4; i <= limit; i++) {
+        try {
 
-				sequence.put(new SemiDivisibleProducer(i, output));
-			}
+            for (long i =5; i <= limit; i++) {
 
-			System.out.println("Completed populating queue" + sequence.size());
+                sequence.put(new SemiDivisibleProducer(i, output));
+
+//                System.out.println("putting = "+i);
+            }
+
+            System.out.println("Completed populating queue - " + sequence.size());
 
 //			Thread.sleep(10000l);
-			
+
 //			sequence.put(new SemiDivisibleProducer(-1, null));
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
