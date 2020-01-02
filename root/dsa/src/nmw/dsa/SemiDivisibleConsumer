@@ -1,43 +1,44 @@
-package nmw.euler.twothreefour;
+package nmw.euler;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class SemiDivisibleConsumer implements Runnable {
 
-private BlockingQueue<Long> divisibles;
-private volatile AtomicLong output;
-	
-	public SemiDivisibleConsumer(BlockingQueue<Long> divisibles, AtomicLong output) {
-		super();
-		this.divisibles = divisibles;
-		this.output = output;
-	}
-	
-	@Override
-	public void run() {
-		try {
+    private BlockingQueue<Long> divisibles;
+    private volatile AtomicLong output;
 
-			long intrim;
-			
-			while(true){
-				
-				intrim = divisibles.take();
-				
+    public SemiDivisibleConsumer(BlockingQueue<Long> divisibles, AtomicLong output) {
+        super();
+        this.divisibles = divisibles;
+        this.output = output;
+    }
+
+    @Override
+    public void run() {
+
+        try {
+
+            long intrim = 0l;
+
+            while(true){
+
+                intrim = divisibles.take();
+
 				/*if(intrim == -1){
 					break;
 				}*/
-				
-				output.addAndGet(intrim);
-				
-				System.out.println("########################### intrim = " + output);
-			}
-			
-//			System.out.println("FINAL OUTPUT = " + output);
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+
+                output.getAndAdd(intrim);
+
+//                System.out.println("########################### intrim = " + output);
+            }
+
+//			System.out.println("FINAL OUTPUT = " + intrim);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
