@@ -1,0 +1,21 @@
+package nmw.euler.twothreefour;
+
+/*
+ * https://projecteuler.net/problem=234
+ * 
+ */
+public class SemiDivisibleCalculator {
+
+    public static void main(String[] args) throws InterruptedException {
+    	
+        SemiDivisibleProducer s_producer = new SemiDivisibleProducer(999966663333l);
+
+        Thread p_thread = new Thread(s_producer);
+        
+        p_thread.setPriority(Thread.MAX_PRIORITY);
+//        p_thread.setDaemon(true);
+   
+        p_thread.start();
+    }
+
+}
