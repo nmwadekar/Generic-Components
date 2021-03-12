@@ -1,0 +1,265 @@
+GIT
+
+Add RSA authentication Git
+eval $(ssh-agent -s)
+eval $(ssh-add C:/Users/nayan.wadekar/Downloads/nayan_Wadekar)
+
+Repository
+
+git@git2:titan
+
+New branch 
+git checkout -b <branch name>
+
+add & commit
+You can propose changes (add it to the Index) using
+git add <filename>
+git add *
+
+git shortlog -s -n --all --no-merges
+
+From <https://stackoverflow.com/questions/9839083/git-number-of-commits-per-author-on-all-branches> 
+
+
+Push
+git push origin master<or some other branch>
+
+push
+Your changes are now in the HEAD of your local working copy. To send those changes to your remote repository, execute 
+git push origin master<or some other branch>
+
+git commit -m "Commit message"
+Now the file is committed to the HEAD, but not in your remote repository yet.
+
+git pull
+to update your local repository to the newest commit, execute in your working directory to fetch and merge remote changes.
+
+Reset
+to drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it like this
+git fetch origin
+git reset --hard origin/master
+
+To discard last commit
+git reset --hard HEAD^
+
+To discard n commit
+git reset --hard HEAD~2
+
+Reset to remote branch loosing local commits
+
+git reset --hard @{u} 
+
+
+git merge <branch>
+to merge another branch into your active branch (e.g. master), use
+
+git commit --amend
+
+Change last commit, add file, change message etc.
+
+To get the current version of branch
+Git describe master 
+
+18.1.1.23-
+
+preview 
+git diff <source_branch> <target_branch>
+
+tagging
+git tag 1.0.0 1b2e1d63ff
+
+Git Cherry picking
+git cherry-pick -x <commit-hash>. This will generate a standardized commit message. This way, you (and your co-workers) can still keep track of the origin of the commit and may avoid merge conflicts in the future
+
+checkout 
+git checkout -- <filename>
+
+If you have not cloned an existing repository and want to connect your repository to a remote server, you need to add it with
+git remote add origin <server>
+
+Log viewer
+git log --author=nayan
+git log --pretty=oneline
+git log --graph --oneline --decorate --all
+git log --name-status
+git log --help
+git log -10 --reverse
+
+GIT stash
+
+git stash show -p
+git stash drop
+Git stash pop 
+Git stash list
+git stash apply stash@{2}
+git stash show --name-only
+
+Creating a Branch from a Stash
+git stash branch <branch>
+
+git stash show -p stash@{1} --name-only
+
+For long filenames in git
+
+git config --system core.longpaths true
+
+Pasted from <http://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows> 
+
+GIT difference
+
+git diff --name-status invoicing..S-55601
+
+git diff --stat --color invoicing..S-55601
+
+git diff master..otherbranch > myDiffFile.diff
+
+To find commit belongs to which branch
+
+git branch --contains <commit>
+
+Reset branch to remote
+
+git reset --hard origin/master
+
+Git create patch
+
+git format-patch invoicing --stdout > fix_empty_poster.patch
+
+Apply patch
+
+See difference
+git apply --stat a_file.patch
+Then a dry run to detect errors:
+git apply --check a_file.patch
+
+Apply
+
+Git apply patch.file
+
+Files in commit
+
+git diff-tree --no-commit-id --name-only -r 73da90c
+
+Find difference commit
+
+git log invoicing..R17.1 --author=nayan --date=short --pretty=format:"%H %an %ad %s"
+
+Not in invoicing all commits display
+
+Remove last unpushed commit without loosing local changes
+
+git reset HEAD~1 --soft
+
+
+
+
+
+
+Git commit differences
+
+git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master..invoicing
+
+Git search all remote branched
+
+git branch --all | grep 16.3
+
+git diff --name-only SHA1 SHA2
+
+git branch -vv
+
+Git difference different branches folder/path
+
+git diff invoicing-R17.3 -- acceptance-testing/ invoicing -- acceptance-testing/
+
+Git find commit difference for specific folder 
+
+git log --oneline --pretty=format:"%h%x09%an%x09%ad%x09%s" --graph invoicing..invoicing-R17.3 acceptance-testing
+
+git log --oneline invoicing..invoicing-R17.3
+
+Reflog changes view
+
+git show master@{yesterday}
+  
+  To put line into file
+
+echo 'version 2' > test.txt
+
+Branch from existing
+
+git checkout -b S-55597 invoicing
+
+git push origin S-55597
+
+git branch --set-upstream-to=origin/S-55597 S-55597
+
+To get remote repository
+
+git config --get remote.origin.url
+
+
+git log --oneline --graph --decorate --all
+
+To get file version from object database 
+
+
+$ git hash-object -w test.txt
+1f7a7a472abf3dd9643fd615f6da379c4acb3e3a
+
+git cat-file -p 83baae61804e65cc73a7201a7252750c76066a30 > test.txt
+
+
+To update the local list of remote branches:
+git remote update origin --prune
+
+
+git status -s | egrep "^M" | wc -l
+
+See the files in commit
+
+git diff-tree --no-commit-id --name-only -r bd61ad98
+
+Git command log
+
+git reflog
+
+git cat-file -p master^{tree}
+
+
+git diff --stat --color master..branchName
+git diff --stat --color branchName..master
+
+in case you have not pushed the commit publicly yet:
+
+git reset HEAD~1 --soft   
+
+git config --global diff.tool vimdiff
+
+git config --system core.longpaths true
+git config core.longpaths true
+
+Git diff HEAD [working tree]
+Git diff --cached [index]
+Git diff [working tree]
+
+Change comments
+
+Git rebase -I HEAD~10
+
+FILE DIFFERENCE IN GIT
+
+Git diff invoicing .//.//….PATH OF FILE
+
+Commit file names only
+
+ git show --pretty="" --name-only 3751d7b
+
+Add files to local commit
+
+git commit --amend --no-edit
+
+Pasted from <https://medium.com/@igor_marques/git-basics-adding-more-changes-to-your-last-commit-1629344cb9a8> 
+
+Fetch required details 
+
+git log -30 --author=nayan --oneline --pretty=format:"%h%x09%an%x09%ad%x09%s" --date=short --grep='CCEP-30130'
