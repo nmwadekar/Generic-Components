@@ -1,0 +1,90 @@
+package nmw.dsa;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+//[[2,3],[2,2],[3,3],[1,3],[5,7],[2,2],[4,6]]
+
+class MergeIntervals {
+
+    public static void main(String args[]){
+
+        int[][] input = new int[][]{{2,3}, {2,2}, {3,3},{1,3},{5,7},{2,2},{4,6}};
+
+//    	int[][] input = new int[][]{{1,3}, {2,6}, {8,10},{15,18}};
+
+//    	int[][] input = new int[][]{{1,4},{0,0}};
+    	
+        int[][] output = merge2(input);
+
+        System.out.println(Arrays.deepToString(output));
+    }
+
+
+    public static int[][] merge2(int[][] intervals) {
+
+
+    	Arrays.sort(intervals, Comparator.comparingDouble(o -> o[0]));
+    	
+        List<int[]> values = new ArrayList<>();
+
+        if(intervals == null || intervals.length ==0){
+            return new int[][] {};
+        }
+
+        int[] current = intervals[0];
+        int head = current[0], tail = current[1];
+        boolean merged = false;
+
+        for(int i=0; i < intervals.length; i++){
+
+            current = intervals[i];
+
+            if(tail >= current[0]){
+
+            	if(tail <= current[1])
+            		tail = current[1];
+                
+                if(head > current[0]) {
+                	
+                	head = current[0];
+                }
+                
+                System.out.println(String.format("Merging [%d,%d]", head, tail));
+                
+                merged = true;
+            }
+            else{
+
+            	if(merged) {
+            		System.out.println(String.format("Ouput [%d,%d]", head, tail));
+            		values.add(new int[]{head, tail});
+            		
+                    head = current[0];
+                    tail = current[1];
+
+                    continue;
+            	}
+            		
+/*
+                head = current[0];
+                tail = current[1];
+
+                System.out.println(String.format("Incomplete [%d,%d]", head, tail));
+                values.add(new int[]{head, tail});
+                
+                merged = false;*/
+            }
+        }
+
+        if(merged) {
+        	values.add(new int[]{head, tail});
+        	System.out.println(String.format("End [%d,%d]", head, tail));
+        }
+        
+        return values.toArray(new int[0][]);
+    }
+
+}
