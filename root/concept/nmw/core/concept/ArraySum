@@ -1,0 +1,36 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        
+        int[] output = new int[2];
+        
+        int head=0, tail=numbers.length-1;
+
+        //System.out.println(head +"--"+ tail);
+        
+        while(head < tail){
+            
+             //System.out.println(numbers[head] +"="+ numbers[tail]);
+            //System.out.println(head +"#"+ tail);
+            
+            if(numbers[head] + numbers[tail] == target){
+                
+                output[0] = ++head;
+                output[1] = ++tail;
+                
+                break;
+            }else if(numbers[head] + numbers[tail] > target){
+                
+                tail--;
+            }else {
+                head++;
+            }
+            
+        
+        }
+        
+        
+        //System.out.println("#########");
+        return output;
+        
+    }
+}
