@@ -1,0 +1,47 @@
+import java.util.Arrays;
+
+public class RotateMatrix {
+
+    public static void main(String args[]){
+
+        int[][] input = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+
+        rotate(input);
+
+        System.out.print(Arrays.deepToString(input));
+    }
+
+    public static void rotate(int[][] A) {
+
+        int numRows = A.length;
+        int numCols = A[0].length;
+
+        for(int i=numRows-1;i>=0;i--){
+            for(int j=i-1;j>=0;j--){
+                int temp = A[j][i];
+                A[j][i] = A[i][j];
+                A[i][j] = temp;
+            }
+        }
+
+        int start,end;
+
+        for(int i=0; i < numRows; i++){
+
+            start = 0;
+            end = numCols-1;
+
+            while(start <= end){
+
+//                System.out.println(String.format("i=%d, start=%d, end=%d", i, start, end));
+
+                int temp = A[i][end];
+                A[i][end] = A[i][start];
+                A[i][start] = temp;
+
+                start++;
+                end--;
+            }
+        }
+    }
+}
