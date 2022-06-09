@@ -1,0 +1,77 @@
+package nmw.dsa;
+
+import java.util.Arrays;
+
+public class Search2DMatrix {
+
+	public static void main(String[] args) {
+		
+		int[][] input = new int[][] {
+			
+			new int[] {1,4,7,11,15},
+			new int[] {2,5,8,12,19},
+			new int[] {3,6,9,16,22},
+			new int[] {10,13,14,17,24},
+			new int[] {18,21,23,26,30},
+		};
+
+		searchMatrix(input, 5);
+	}
+	
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        
+        int nRow = matrix.length;
+        int nCol = matrix[0].length;
+        
+        System.out.println(nRow);
+        System.out.println(nCol);
+        
+        int mRow=0, mCol=0, min=0, n;
+        
+        for(int i = 0; i < nCol; i++) {
+        	
+        	if(min < Math.abs(matrix[i][0] - target)) {
+        		
+        		min = matrix[0][i] - target;
+        		mCol = i;
+        		if(min == target) {
+        			return true;
+        		}
+        	}
+        }
+        
+        min = 0;
+        
+        for(int i = 0; i < nRow; i++) {
+        	
+        	if(min < Math.abs(matrix[0][i] - target)) {
+        		
+        		min = matrix[0][i] - target;
+        		mRow = i;
+        		if(min == target) {
+        			return true;
+        		}
+        	}
+        }
+
+        System.out.println(mRow);
+        System.out.println(mCol);
+        
+        
+        for(int i=0; i < mRow; i++) {
+        	
+        	if(matrix[i][mCol] == target) {
+        		
+        		System.out.println("Found at = " + i +","+mCol);
+        		
+        		return true;
+        	}
+        }
+        
+//        System.out.println(Arrays.deepToString(matrix));
+        
+        return false;
+        
+    }
+
+}
