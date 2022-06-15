@@ -1,0 +1,100 @@
+
+import java.math.BigInteger;
+
+public class ListNodeNumber {
+
+    public static void main(String[] args){
+
+        ListNode a = new ListNode(1);
+        ListNode a2 = new ListNode(2);
+        ListNode a3 = new ListNode(3);
+        ListNode a4 = new ListNode(4);
+        ListNode b = new ListNode(5);
+        ListNode a6 = new ListNode(6);
+        ListNode a7 = new ListNode(7);
+
+        a.next = a2;
+        a2.next = a3;
+        a3.next = a4;
+
+        b.next = a6;
+        a6.next = a7;
+
+        ListNode o = addTwoNumbers(a, b);
+
+        System.out.println(o);
+    }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        boolean x = true,y = true;
+        StringBuilder xb = new StringBuilder(),yb = new StringBuilder();
+
+        while(l1 != null || l2 != null){
+
+            if(l1 != null){
+                xb.append(l1.val);
+                l1 = l1.next;
+            }
+            else
+                xb.append(0);
+
+            if(l2 != null){
+                yb.append(l2.val);
+                l2 = l2.next;
+            }
+            else
+                yb.append(0);
+
+        }
+
+        System.out.println(xb +"="+ yb);
+
+        BigInteger a = new BigInteger(xb.reverse().toString());
+        BigInteger b = new BigInteger(yb.reverse().toString());
+
+        System.out.println(a +"<=>"+ b);
+
+
+        yb = new StringBuilder(a.add(b)+"");
+
+        ListNode o = null,n, next = null, current = null;
+
+        System.out.println("###"+yb);
+
+        for(char ch: yb.reverse().toString().toCharArray()) {
+
+            System.out.println("ch=" + ch);
+
+            next = new ListNode(Character.getNumericValue(ch));
+
+            if (o == null) {
+                o = next;
+                current = o;
+            } else {
+                current.next = next;
+                current = next;
+            }
+        }
+
+        return o;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("ListNode{");
+            sb.append("val=").append(val);
+            sb.append(", next=").append(next);
+            sb.append('}');
+            return sb.toString();
+        }
+    }
+
+}
