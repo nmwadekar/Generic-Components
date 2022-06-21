@@ -1,0 +1,25 @@
+class Solution {
+    public int reverse(int x) {
+        
+        if(x > Integer. MAX_VALUE){
+            return 0;
+        }
+        
+        int reverse = 0, last;
+        
+        while(x != 0){
+                    
+            if(reverse  > Integer. MAX_VALUE/10 || 
+              reverse  < Integer. MIN_VALUE/10){
+                return 0;
+            }
+        	            
+            last = x % 10;
+            reverse = reverse * 10 + last;
+            x = x / 10;
+        }
+        //if(ans >= Math.pow(2,31))ans = 0;
+        return reverse;
+        //return reverse >= Math.pow(2,31) ? 0 : reverse;
+    }
+}
