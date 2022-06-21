@@ -1,0 +1,93 @@
+package nmw.spring.batch;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class MinPositive {
+
+    public static void main(String args[]){
+
+        int[] a = new int[]{0,0,0,0,0};
+        int[] b = new int[]{-1,0,0,0,0,0,1};
+
+//        System.out.println(minPositive(new int[]{2,1}));
+
+        System.out.println(findMedianSortedArrays(a,b));
+    }
+
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        double output = 0;
+
+        int length = (nums1.length + nums2.length);
+
+        int mid = length/2;
+
+        boolean isEven = length % 2 == 0, skip1=false, skip2=false;
+
+        int[] resultant = new int[mid+1];
+
+        int l1 = nums1.length, l2 = nums2.length;
+        int p=0,q=0, m=0, n=0;
+
+        for(int i = 0; i <= mid; i++){
+
+            if(p < l1){
+                m = nums1[p];
+            }else{
+                skip1 = true;
+            }
+            if(q < l2){
+                n = nums2[q];
+            }else{
+                skip2 = true;
+            }
+
+            if(skip1 && q <l2){
+                resultant[i] = nums2[q];
+                q++;
+                continue;
+            }
+            if(skip2 && p < l1){
+                resultant[i] = nums1[p];
+                p++;
+                continue;
+            }
+
+            if(m < n){
+                resultant[i] = m;
+                p++;
+            }else if(m > n){
+                resultant[i] = n;
+                q++;
+            }else{
+                resultant[i] = m;
+                p++;
+            }
+        }
+
+        System.out.println((Arrays.toString(resultant)));
+
+        return isEven ?  ((double)resultant[mid-1] + resultant[mid])/2 : resultant[mid] ;
+    }
+
+    private static int minPositive(int[] nums){
+
+        Set<Integer> input = new HashSet<>();
+
+        int output = 1;
+
+        for(int i : nums){
+            input.add(i);
+
+            if(input.contains(output)){
+                output++;
+            }
+        }
+
+        return output;
+    }
+
+}
