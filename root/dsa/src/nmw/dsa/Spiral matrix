@@ -1,0 +1,48 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        
+        
+        int[][] output = new int[n][n];
+
+        int top = 0, bottom = n - 1, left = 0, right = n - 1;
+        int dir = 1, val = 1;
+
+        while(top <= bottom && left <= right){
+
+            //left->right
+            if(dir == 1){
+                for(int i=left;i <= right;i++){
+                    output[top][i] = val++;
+                }
+                top++;
+                dir = 2;
+            }
+            //top->bottom
+            else if(dir == 2){
+                for(int i=top;i <= bottom;i++){
+                    output[i][right] = val++;
+                }
+                right--;
+                dir = 3;
+            }
+            //right->left
+            else if(dir == 3){
+                for(int i=right;i >= left;i--){
+                    output[bottom][i] = val++;
+                }
+                bottom--;
+                dir = 4;
+            }
+            //bottom->top
+            if(dir == 4){
+                for(int i=bottom;i >= top;--i){
+                    output[i][left] = val++;
+                }
+                left++;
+                dir = 1;
+            }
+        }
+
+        return output;
+    }
+}
