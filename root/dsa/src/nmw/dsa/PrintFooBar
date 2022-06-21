@@ -1,0 +1,50 @@
+class FooBar {
+    private int n;
+    private static final Object myLock = new Object();
+    private static boolean isFooPrinted = false;
+    
+    public FooBar(int n) {
+        this.n = n;
+    }
+
+    public void foo(Runnable printFoo) throws InterruptedException {
+        
+        for (int i = 0; i < n; i++) {
+            
+            synchronized(myLock){
+        
+                printFoo.run();
+                
+                isFooPrinted = true;
+                
+                myLock.notify();
+                 
+                if(i != n-1) 
+                    myLock.wait();
+                
+                isFooPrinted = false;
+            }
+        }
+    }
+
+    public void bar(Runnable printBar) throws InterruptedException {
+
+        
+        for (int i = 0; i < n; i++) {
+            
+            synchronized(myLock){              
+                                
+                if(!isFooPrinted) 
+                    myLock.notify();
+                
+                printBar.run();            
+            
+                myLock.notify();
+                
+                if(i != n-1) 
+                    myLock.wait();
+            }
+            
+        }
+    }
+}
