@@ -1,0 +1,40 @@
+import java.math.BigInteger;
+class Solution {
+
+
+	public static List<Integer> getRow(int rowIndexx) {
+		BigInteger rowIndex = new BigInteger(""+rowIndexx);
+		
+		List<BigInteger> output = new ArrayList<>();
+
+		int head = 0, tail = rowIndex.intValue();
+		BigInteger n;
+
+		Integer[] result = new Integer[rowIndexx+1];
+		
+		
+		while (head <= tail) {
+
+			n = fact(rowIndex).divide( ( fact(new BigInteger(""+ (rowIndexx - head))).multiply(fact(new BigInteger(""+head)))));
+
+			result[head] = n.intValue();
+			result[tail] = n.intValue();
+			
+			head++;
+			tail--;
+			 
+		}
+
+		return Arrays.stream(result).collect(Collectors.toList());
+	}
+
+	private static BigInteger fact(BigInteger x) {
+
+		if (x.intValue() <= 1) {
+			return BigInteger.ONE;
+		}
+
+		return x.multiply(fact(x.subtract(BigInteger.ONE)));
+	}
+
+}
