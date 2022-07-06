@@ -1,0 +1,44 @@
+package nmw.spring.batch;
+
+public class MostWater {
+
+    public static void main(String args[]) {
+
+        int[] input = new int[]{1, 3, 2, 5, 25, 24, 5};
+
+        System.out.println(maxArea(input));
+    }
+
+    public static int maxArea(int[] height) {
+
+        int area = 0, current, head = 0, tail = height.length - 1,
+                current_x, current_y;
+
+
+        for (int i = 0; i < height.length; i++) {
+
+            current_y = height[head] < height[tail]
+                    ? height[head]
+                    : height[tail];
+
+            current_x = tail - head;
+
+            current = current_x * current_y;
+
+            System.out.println(String.format("head[%d]=%d,tail[%d]=%d,area=%d",
+                    head, height[head], tail, height[tail], current));
+
+            if (area < current) {
+                area = current;
+            }
+
+            if (height[head] <= height[tail]) {
+                head++;
+            } else if (height[tail] < height[head]) {
+                tail--;
+            }
+        }
+
+        return area;
+    }
+}
