@@ -1,0 +1,52 @@
+public class RemoveNthNode {
+
+    public static void main(String... args){
+
+        ListNode head = new ListNode(5);
+        ListNode current = head;
+
+        for(int i = 4; i >=1; i--){
+
+            current = new ListNode(i, current);
+        }
+
+        System.out.println(current);
+
+        current = removeNthFromEnd(current, 3);
+
+        System.out.println(current);
+    }
+
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+
+        if(head == null || head.next == null){
+            return null;
+        }
+
+        ListNode delete = head;
+        int ptr = 1;
+
+//        n++;
+
+
+        while(ptr != n){
+            delete.next = head.next;
+            head = head.next;
+            ptr++;
+        }
+
+        delete.next = head;
+
+        return delete;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+}
+
+
