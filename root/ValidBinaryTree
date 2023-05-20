@@ -1,0 +1,90 @@
+package nmw.leetcode;
+
+public class ValidSearchTree {
+
+//            5
+//    3           8
+//            10
+
+    //            5
+//    3                 8
+//                  7
+
+    private int root;
+    private ValidSearchTree right;
+    private ValidSearchTree left;
+
+    private static ValidSearchTree generateInput() {
+
+        ValidSearchTree root = new ValidSearchTree(5);
+
+        ValidSearchTree left1 = new ValidSearchTree(3);
+        ValidSearchTree right1 = new ValidSearchTree(8);
+
+        ValidSearchTree left2 = new ValidSearchTree(10);
+
+        right1.setLeft(left2);
+        root.setLeft(left1);
+        root.setRight(right1);
+
+        return root;
+    }
+
+    public static void main(String... args) {
+
+        ValidSearchTree input = generateInput();
+        int root = input.root;
+
+        System.out.print(isBinaryTree(input));
+    }
+
+    private static boolean isBinaryTree(ValidSearchTree input) {
+
+        if(input == null){
+            return true;
+        }
+
+        int root = input.root;
+
+        int left = input.getLeft() != null
+                ? input.getLeft().root : 0;
+
+        int right = input.getRight() != null
+                ? input.getRight().root : Integer.MAX_VALUE;
+
+        if (root > left && root < right) {
+            return isBinaryTree(input.getLeft()) && isBinaryTree(input.getRight());
+        }else{
+            return false;
+        }
+
+    }
+
+    public ValidSearchTree(int root) {
+        this.root = root;
+    }
+
+    public int getRoot() {
+        return root;
+    }
+
+    public void setRoot(int root) {
+        this.root = root;
+    }
+
+    public ValidSearchTree getRight() {
+        return right;
+    }
+
+    public void setRight(ValidSearchTree right) {
+        this.right = right;
+    }
+
+    public ValidSearchTree getLeft() {
+        return left;
+    }
+
+    public void setLeft(ValidSearchTree left) {
+        this.left = left;
+    }
+}
