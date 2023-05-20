@@ -1,0 +1,145 @@
+package nmw.leetcode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class SplitWiseService {
+
+    private static List<Person> generateInput(){
+
+        int[] amounts = {-2000, 400, 300, -500, 1500, 300};
+        String[] names = {"A","B","C","D","E","F"};
+
+        List<Person> output = new ArrayList<>();
+
+        for(int i = 0; i <amounts.length; i++){
+
+            output.add(new Person(names[i], amounts[i]));
+        }
+
+        return output;
+
+        //    A , -2000
+//    B, 400
+//    C, 300
+//    D, -500
+//    E, 1500
+//    F, 300
+
+//        2] B received 400 from A = -1600
+//        2] B received 0 from D
+//        2] C received 300 from A = -1300
+//        2] C received 0 from D
+//        1] E received 1300 from A = -200
+//        2] E received 200 from D = -300
+//        2] F received 300 from D
+
+
+    }
+
+    private static Map<Integer, List<Person>> fetchPersons(List<Person> input){
+
+        Map<Integer, List<Person>> output = new HashMap<>();
+
+        List<Person> positives = new ArrayList<>();
+        List<Person> negatives = new ArrayList<>();
+
+        for(Person p : input){
+
+            if(p.getAmount() >= 0){
+                positives.add(p);
+            }else{
+                negatives.add(p);
+            }
+        }
+
+        output.put(0, positives);
+        output.put(1, negatives);
+
+        return output;
+    }
+
+    public static void main(String... args){
+
+        Map<Integer, List<Person>> output = fetchPersons(generateInput());
+
+        List<Person> positives = output.get(0);
+        List<Person> negatives = output.get(1);
+
+        for(Person p : positives){
+
+            while(p.getAmount() != 0){
+
+                for(Person n : negatives){
+
+                    while(n.getAmount() != 0){
+
+                        long toDeduct = n.getAmount() * -1;
+
+                        if(p.getAmount() > toDeduct){
+
+                            System.out.println(String.format("1] %s received %d from %s",
+                                    p.getName(), toDeduct, n.getName()));
+
+                            p.setAmount(p.getAmount() - toDeduct);
+                            n.setAmount(0);
+
+                        }else{
+
+                            System.out.println(String.format("2] %s received %d from %s",
+                                    p.getName(), p.getAmount(), n.getName()));
+
+                            n.setAmount(-1 * (toDeduct - p.getAmount()));
+                            p.setAmount(0);
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static class Person {
+
+        private String name;
+        private long amount;
+
+        // 1. find out +ve -ve amounts
+
+        // 2000, 500
+        //400, 300, 1500. 300
+
+//    A , -2000
+//    B, 400
+//    C, 300
+//    D, -500
+//    E, 1500
+//    F, 300
+
+
+        public Person(String name, long amount) {
+            this.name = name;
+            this.amount = amount;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public long getAmount() {
+            return amount;
+        }
+
+        public void setAmount(long amount) {
+            this.amount = amount;
+        }
+    }
+
+}
