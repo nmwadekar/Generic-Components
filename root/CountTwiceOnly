@@ -1,0 +1,39 @@
+import java.util.Arrays;
+
+public class CountTwiceOnly {
+
+    public static void main(String[] args) {
+
+        int[] input = {1, 1, 1, 2, 2, 3};
+
+        System.out.println(removeDuplicates(input));
+
+        System.out.println(Arrays.toString(input));
+    }
+
+    public static int removeDuplicates(int[] nums) {
+
+        int current, count = 0, tempo = 1;
+        int prev = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+
+            current = nums[i];
+
+            if (current != prev) {
+                prev = current;
+                tempo = 1;
+            } else {
+                tempo++;
+                if (tempo > 2) {
+                    nums[i] = Integer.MAX_VALUE;
+                    count++;
+                }
+            }
+        }
+
+        Arrays.sort(nums);
+
+        return nums.length - count;
+    }
+}
