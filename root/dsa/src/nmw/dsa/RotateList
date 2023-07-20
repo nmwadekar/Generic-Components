@@ -1,0 +1,78 @@
+public class RotateList {
+
+    public static void main(String[] args) {
+
+        ListNode zero = new ListNode(0);
+        ListNode one = new ListNode(1);
+        ListNode two = new ListNode(2);
+//        ListNode three = new ListNode(3);
+//        ListNode four = new ListNode(4);
+//        ListNode five = new ListNode(5);
+
+        zero.next = one;
+        one.next = two;
+//        two.next = three;
+//        three.next = four;
+//        four.next = five;
+
+        ListNode output = rotateRight(zero, 4);
+
+        System.out.println(output);
+    }
+
+    public static ListNode rotateRight(ListNode head, int k) {
+
+        if (head == null)
+            return null;
+
+        int len = 1;
+
+        ListNode tail = head, newHead = head, newTail = head;
+
+        while (tail.next != null) {
+            tail = tail.next;
+            len++;
+        }
+
+        int shift = k % len, lastIndex = len - shift;
+
+        if (shift == 0 || k == 0 || len == 0) {
+            return head;
+        }
+
+        while(lastIndex > 1) {
+            newTail = newTail.next;
+            lastIndex--;
+        }
+
+        newHead = newTail.next;
+        newTail.next = null;
+        tail.next = head;
+        head = newHead;
+
+        return head;
+    }
+
+    private static class ListNode {
+
+        int val;
+        ListNode next;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+
+        public ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
+        }
+    }
+}
