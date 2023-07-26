@@ -1,0 +1,83 @@
+public class NodeSwapLL {
+
+
+    public static void main(String[] args) {
+
+        ListNode _1 = new ListNode(1);
+        ListNode _2 = new ListNode(2);
+//        ListNode _3 = new ListNode(3);
+//        ListNode _4 = new ListNode(4);
+//        ListNode _5 = new ListNode(5);
+//        ListNode _6 = new ListNode(6);
+//        ListNode _7 = new ListNode(7);
+
+        _1.next = _2;
+//        _2.next = _3;
+//        _3.next = _4;
+//        _4.next = _5;
+//        _5.next = _6;
+//        _6.next = _7;
+
+        System.out.println(swapNodes(_1, 1));
+
+    }
+
+    public static ListNode swapNodes(ListNode head, int k) {
+
+        if (k <= 0 || head == null || head.next == null)
+            return head;
+
+        int len = 1;
+        ListNode tempo = head, front = head, rear = head;
+
+        while (tempo.next != null) {
+            tempo = tempo.next;
+
+            if (++len == k) {
+                front = tempo;
+            }
+        }
+
+        tempo = head;
+
+        int rearIndex = len - k;
+
+        while (--rearIndex >= 0) {
+
+            tempo = tempo.next;
+        }
+
+        rear = tempo;
+
+        int f = front.val;
+        front.val = rear.val;
+        rear.val = f;
+
+        return head;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
+        }
+    }
+}
